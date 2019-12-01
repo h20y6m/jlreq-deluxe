@@ -1,0 +1,166 @@
+\documentclass[dvipdfmx]{jlreq}
+
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+
+\usepackage[haranoaji,jis2004]{jlreq-deluxe}
+% 原ノ味フォント / Harano Aji Fonts (https://github.com/trueroad/HaranoAjiFonts)
+
+\usepackage{bxghost}
+
+\usepackage{shortvrb}
+\MakeShortVerb{\|}
+
+\newcommand{\pkg}[1]{\textsf{#1}}
+\newcommand{\cls}[1]{\textsf{#1}}
+\newcommand{\cmd}[1]{\eghostguarded{\texttt{\symbol{92}#1}}}
+\newcommand{\meta}[1]{$\langle$\nobreak\hspace{0pt}#1\nobreak\hspace{0pt}$\rangle$}
+
+\newcommand{\pTeX}{p\TeX}
+\newcommand{\pLaTeX}{p\LaTeX}
+\newcommand{\upTeX}{u\pTeX}
+\newcommand{\upLaTeX}{u\pLaTeX}
+
+
+\title{\pkg{jlreq-deluxe} パッケージ}
+\author{h20y6m}
+\date{2019/12/01}
+
+\begin{document}
+
+\maketitle
+
+\section{概要}
+
+{\pLaTeX}および{\upLaTeX}上の\cls{jlreq}クラスにおいて和文を多書体（多ウェイト）にする機能を提供する。
+
+\section{前提条件}
+
+\begin{itemize}
+\item {\TeX}フォーマット：{\LaTeX}。
+\item {\TeX}エンジン：{\pTeX}、{\upTeX}。
+\item DVIウェア：dvipdfmx（フォント指定機能）
+\item 前提パッケージ：
+  \begin{itemize}
+  \item \cls{jlreq}クラス
+  \item \pkg{otf}パッケージ（\cmd{UTF}及び\cmd{CID}用のフォント）
+  \end{itemize}
+\end{itemize}
+
+\section{オプション}
+
+オプションは次のものが用意されている。
+
+\begin{itemize}
+\item \textsf{プリセット指定オプション}（|ipaex|、|hiragino-pron| 等）\\
+  名前に対応するプリセット指定を有効にする。
+\item |jis2004|\\
+  フォント指定機能でJIS2004字形を使用する。
+\item |unicode|\\
+  フォント指定でUnicode直接指定を使用する。（{\pLaTeX}では使用できない。）
+\end{itemize}
+
+\section{機能}
+
+\subsection{多書体（多ウェイト）}
+
+明朝・ゴシックともに3ウェイトおよび丸ゴシックが使用可能になる。
+
+\begin{itemize}
+\item 明朝・細ウェイト（|\mcfamily\ltseries|）
+\item 明朝・中ウェイト（|\mcfamily\mdseries|）
+\item 明朝・太ウェイト（|\mcfamily\bfseries|）
+\item ゴシック・中ウェイト（|\gtfamily\mdseries|）
+\item ゴシック・太ウェイト（|\gtfamily\bfseries|）
+\item ゴシック・極太ウェイト（|\gtfamily\ebseries|）
+\item 丸ゴシック（|\mgfamily|）
+\end{itemize}
+
+% \subsection{\cmd{UTF}及び\cmd{CID}}
+
+% 以下の命令が使用できる。
+
+% \begin{itemize}
+% \item |\UTF{|\meta{十六進}|}|：\meta{十六進}で指定されたUnicodeポイントの文字を出力する。
+% \item |\CID{|\meta{十進}|}|：\meta{十進}で指定されたCIDの文字を出力する。\\
+%   ※|unicode|オプション指定時は使用できない。
+%\end{itemize}
+
+\subsection{フォント指定}
+
+以下のフォント指定命令が使用できる。
+
+\begin{itemize}
+\item |\setminchofont[|\meta{番号}|]{|\meta{フォントファイル名}|}|：\\
+  明朝体{\footnotesize （|\mcfamily|）}の3ウェイトすべてのフォントを置き換える。\\
+  TTC形式の場合の該当フォントの番号を\meta{番号}に指定する。
+\item |\setgothicfont[|\meta{番号}|]{|\meta{フォントファイル名}|}|：\\
+  ゴシック体{\footnotesize （|\gtfamily|）}の3ウェイトすべてのフォントを置き換える。\\
+  TTC形式の場合の該当フォントの番号を\meta{番号}に指定する。
+\item |\setlightminchofont[|\meta{番号}|]{|\meta{フォントファイル名}|}|：\\
+  明朝体・細ウェイト{\footnotesize （|\mcfamily\ltseries|）}のフォントを置き換える。\\
+  TTC形式の場合の該当フォントの番号を\meta{番号}に指定する。
+\item |\setmediumminchofont[|\meta{番号}|]{|\meta{フォントファイル名}|}|：\\
+  明朝体・中ウェイト{\footnotesize （|\mcfamily\mdseries|）}のフォントを置き換える。\\
+  TTC形式の場合の該当フォントの番号を\meta{番号}に指定する。
+\item |\setboldminchofont[|\meta{番号}|]{|\meta{フォントファイル名}|}|：\\
+  明朝体・太ウェイト{\footnotesize （|\mcfamily\bfseries|）}のフォントを置き換える。\\
+  TTC形式の場合の該当フォントの番号を\meta{番号}に指定する。
+\item |\setmediumgothicfont[|\meta{番号}|]{|\meta{フォントファイル名}|}|：\\
+  ゴシック体・中ウェイト{\footnotesize （|\gtfamily\mdseries|）}のフォントを置き換える。\\
+  TTC形式の場合の該当フォントの番号を\meta{番号}に指定する。
+\item |\setboldgothicfont[|\meta{番号}|]{|\meta{フォントファイル名}|}|：\\
+  ゴシック体・太ウェイト{\footnotesize （|\gtfamily\bfseries|）}のフォントを置き換える。\\
+  TTC形式の場合の該当フォントの番号を\meta{番号}に指定する。
+\item |\setxboldgothicfont[|\meta{番号}|]{|\meta{フォントファイル名}|}|：\\
+  ゴシック体・極太ウェイト{\footnotesize （|\gtfamily\ebseries|）}のフォントを置き換える。\\
+  TTC形式の場合の該当フォントの番号を\meta{番号}に指定する。
+\item |\setmarugothicfont[|\meta{番号}|]{|\meta{フォントファイル名}|}|：\\
+  丸ゴシック体{\footnotesize （|\mgfamily|）}のフォントを置き換える。\\
+  TTC形式の場合の該当フォントの番号を\meta{番号}に指定する。
+\end{itemize}
+
+\section{プリセット指定}
+
+以下のプリセット指定が使用できる。
+
+\begin{itemize}
+\item |ms|：MSフォント。
+\item |ipa|：IPAフォント。
+\item |ipaex|：IPAexフォント。
+\item |ms-hg|：MSフォント＋HGフォント。
+\item |ipa-hg|：IPAフォント＋HGフォント。
+\item |ipaex-hg|：IPAexフォント＋HGフォント。
+\item |moga-mobo|：Mogaフォント＋Moboフォント。
+\item |moga-mobo-ex|：MogaExフォント＋MoboExフォント。
+\item |moga-maruberi|：Mogaフォント＋モトヤLマルベリ3等幅。
+\item |ume|：梅フォント。
+\item |kozuka-pro|：小塚フォント（Pro版）。
+\item |kozuka-pr6|：小塚フォント（Pr6版）。
+\item |kozuka-pr6n|：小塚フォント（Pr6n版）。
+\item |hiragino-pro|：ヒラギノ基本6書体セット（Pro/Std版）＋明朝W2。
+\item |hiragino-pron|：ヒラギノ基本6書体セット（ProN/StdN版）＋明朝W2。
+\item |hiragino-elcapitan-pro|：ヒラギノフォント（Mac OS X El Capitan搭載；Pro/Std版）＋明朝W2。
+\item |hiragino-elcapitan-pron|：ヒラギノフォント（Mac OS X El Capitan搭載；ProN/StdN版）＋明朝W2。
+\item |morisawa-pro|：モリサワフォント基本7書体（Pro版）。
+\item |morisawa-pr6n|：モリサワフォント基本7書体（Pr6N版）。
+\item |yu-win|：游書体（Windows 8.1搭載版）。
+\item |yu-win10|：游書体（Windows 10搭載版）。\\
+  ※“”‘’の出力が不正になる。|unicode|オプションを指定することで回避できる。
+\item |yu-osx|：游書体（Mac OS X搭載版）。
+\item |sourcehan-otc|：Source Han Serif（源ノ明朝）＋Source Han Sans（源ノ角ゴシック）、OTC版。\\
+  ※|unicode|オプションが自動的に有効になる。{\pLaTeX}では使用できない。
+\item |sourcehan|：Source Han Serif（源ノ明朝）＋Source Han Sans（源ノ角ゴシック）、言語別OTF版。\\
+  ※|unicode|オプションが自動的に有効になる。{\pLaTeX}では使用できない。
+\item |sourcehan-jp|：Source Han Serif（源ノ明朝）＋Source Han Sans（源ノ角ゴシック）、地域別サブセットOTF版。\\
+  ※|unicode|オプションが自動的に有効になる。{\pLaTeX}では使用できない。
+\item |noto-otc|：Noto Serif CJK JP＋Noto Sans CJK JP、OTC版。\\
+  ※|unicode|オプションが自動的に有効になる。{\pLaTeX}では使用できない。
+\item |noto|：Noto Serif CJK JP＋Noto Sans CJK JP、言語別OTF版。\\
+  ※|unicode|オプションが自動的に有効になる。{\pLaTeX}では使用できない。
+\item |noto-jp|：Noto Serif CJK JP＋Noto Sans CJK JP、地域別サブセットOTF版。\\
+  ※|unicode|オプションが自動的に有効になる。{\pLaTeX}では使用できない。
+\item |haranoaji|：原ノ味明朝＋原ノ味ゴシック。
+\end{itemize}
+
+\end{document}
