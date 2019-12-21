@@ -11,7 +11,7 @@
 
 \NeedsTeXFormat{pLaTeX2e}
 \RequirePackage{expl3}
-\ProvidesExplPackage {jlreq-deluxe} {2019/12/01} {0.1.0}
+\ProvidesExplPackage {jlreq-deluxe} {2019/12/21} {0.1.1}
   {Multi weight font for jlreq class}
 
 % --------------------------------------------------
@@ -102,9 +102,16 @@
 
 %% jlreq jafontscale
 \tl_new:N \l_jldx_jafontscale_tl
-\tl_set:Nx \l_jldx_jafontscale_tl
+\cs_if_exist:NTF \Cjascale
   {
-    \fp_to_decimal:n { \jlreq@jafontsize / \jlreq@fontsize }
+    \tl_set:Nx \l_jldx_jafontscale_tl { \Cjascale }
+  }
+  {
+    \jlreq@divide { \jlreq@jafontsize } { \jlreq@fontsize }
+    \tl_set:Nx \l_jldx_jafontscale_tl
+      {
+        \strip@pt \jlreq@resultdimen
+      }
   }
 
 %% jlreq font prefix
