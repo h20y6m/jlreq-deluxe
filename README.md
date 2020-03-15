@@ -1,22 +1,22 @@
 jlreq-deluxe パッケージ
 =======================
 
-LaTeX：pLaTeX 及び upLaTeX で jlreq クラスを使用する場合に和文を多書体（多ウェイト）にする。
+LaTeX：八登崇之氏作成の [pxjodel](https://www.ctan.org/pkg/pxjodel) パッケージを利用し pLaTeX 及び upLaTeX で jlreq クラスを使用する場合に和文を多書体（多ウェイト）にする。
 
 ## 前提条件
 
 * フォーマット：LaTeX
 * エンジン：pTeX 及び upTeX
-* DVIウェア：dvipdfmx
+* DVIウェア：和文 TFM と VF をサポートするもの。
 * 依存パッケージ
-  - jlreq クラス
-  - otf パッケージ
+  - [jlreq](https://www.ctan.org/pkg/jlreq) クラス
+  - pxjodel パッケージ
 
 ## インストール
 
 以下のコマンドで必要なファイルを生成する。
 ```
-l3build vfcopy
+l3build makejvf
 ```
 
 各ファイルを以下のように配置する。
@@ -32,75 +32,45 @@ l3build install
 
 ## 使用方法
 
+通常のパッケージと同様に `\usepackage` で読み込む。
+
 ```tex
-\usepakage{jlreq-deluxe}
-```
-とする。以下のフォントが使用可能になる。
-* 明朝・細ウェイト（`\mcfamily\ltseries`）
-* 明朝・中ウェイト（`\mcfamily\mdseries`）
-* 明朝・太ウェイト（`\mcfamily\bfseries`）
-* ゴシック・中ウェイト（`\gtfamily\mdseries`）
-* ゴシック・太ウェイト（`\gtfamily\bfseries`）
-* ゴシック・極太ウェイト（`\gtfamily\ebseries`）
-* 丸ゴシック（`\mgfamily`）
-
-### フォント指定
-
-以下のフォント指定命令が使用できる。
-* `\setminchofont[<index>]{<fontfile>}`
-  - 明朝体 3 ウェイトのフォントをすべて `<fontfile>` にする。
-    `<index>` は TTC インデックス。
-* `\setlightminchofont[<index>]{<fontfile>}`
-  - 明朝体・細ウェイトのフォントを `<fontfile>` にする。
-    `<index>` は TTC インデックス。
-* `\setmediumminchofont[<index>]{<fontfile>}`
-  - 明朝体・中ウェイトのフォントを `<fontfile>` にする。
-    `<index>` は TTC インデックス。
-* `\setboldminchofont[<index>]{<fontfile>}`
-  - 明朝体・太ウェイトのフォントを `<fontfile>` にする。
-    `<index>` は TTC インデックス。
-* `\setgothicfont[<index>]{<fontfile>}`
-  - ゴシック体 3 ウェイトのフォントをすべて `<fontfile>` にする。
-    `<index>` は TTC インデックス。
-* `\setmediumgothicfont[<index>]{<fontfile>}`
-  - ゴシック体・細ウェイトのフォントを `<fontfile>` にする。
-    `<index>` は TTC インデックス。
-* `\setboldgothicfont[<index>]{<fontfile>}`
-  - ゴシック体・中ウェイトのフォントを `<fontfile>` にする。
-    `<index>` は TTC インデックス。
-* `\setxboldgothicfont[<index>]{<fontfile>}`
-  - ゴシック体・太ウェイトのフォントを `<fontfile>` にする。
-    `<index>` は TTC インデックス。
-* `\setmarugothicfont[<index>]{<fontfile>}`
-  - 丸ゴシック体のフォントを `<fontfile>` にする。
-    `<index>` は TTC インデックス。
-
-### フォントプリセット
-
-パッケージ読み込み時にフォントプリセットを指定できる。
-```tex
-\usepackage[<preset>]{jlreq-deluxe}
+\usepackage[オプション]{jlreq-deluxe}
 ```
 
-使用可能なプリセットは
-`ms`、`ipa`、`ipaex`、
-`ms-hg`、`ipa-hg`、`ipaex-hg`、
-`moga-mobo`、`moga-mobo-ex`、`moga-maruberi`、
-`ume`、
-`kozuka-pro`、`kozuka-pr6`、`kozuka-pr6n`、
-`hiragino-pro`、`hiragino-pron`、`hiragino-elcapitan-pro`、`hiragino-elcapitan-pron`、
-`morisawa-pro`、`morisawa-pr6n`、
-`yu-win`、`yu-win10`、`yu-osx`、
-`sourcehan-otc`、`sourcehan`、`sourcehan-jp`、
-`noto-otc`、`noto`、`noto-jp`、
-`haranoaji`。
+基本的に jlreq クラスとともに使用することを想定しているが、
+他のクラスでも使用することは出来る。
 
-ただし `sourcehan-otc`、`sourcehan`、`sourcehan-jp`、
-`noto-otc`、`noto`、`noto-jp` は pLaTeX では使用できない。
+\section{オプション}
+
+基本的に otf パッケージのと同じオプションが使用できるが、
+以下のオプションは動作が異なる。
+
+* `deluxe`
+  - 既定で有効になる。
+  - 無効にしたい場合は|deluxe=false|を指定する。
+* `expert`
+  - 使用できない。
+* `burasage`
+  - 使用できない。
+* `scale`
+  - jlreq クラスを使用している場合は自動的に設定され指定は無視される。
+
+また以下のオプションが使用できる。
+
+* `hanging_punctuation`
+  - jlreq クラスの `hanging_punctuation` 指定時用のJFMを使用する。
+  - jlreq クラスを使用している場合は自動的に設定され指定は無視される。
+* `zenkakunibu_nibu`
+  - jlreq クラスの `open_bracket_pos=zenkakunibu_nibu` 指定時用のJFMを使用する。
+  - jlreq クラスを使用している場合は自動的に設定され指定は無視される。
+
 
 更新履歴
 -------
 
+* Version 0.2.0 <2020/03/15>
+  - pxjodel 使用版
 * Version 0.1.1 <2019/12/21>
   - 和文フォントスケール修正
 * Version 0.1.0 <2019/12/01>

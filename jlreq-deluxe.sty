@@ -1,7 +1,7 @@
 %%
 %% jlreq-deluxe.sty
 %%
-%% Copyright 2019 h20y6m
+%% Copyright 2019-2020 h20y6m
 %%   GitHub:   https://github.com/h20y6m
 %%
 %% This package is distributed under the MIT License.
@@ -11,725 +11,145 @@
 
 \NeedsTeXFormat{pLaTeX2e}
 \RequirePackage{expl3}
-\ProvidesExplPackage {jlreq-deluxe} {2019/12/21} {0.1.1}
+\ProvidesExplPackage {jlreq-deluxe} {2020/03/15} {0.2.0}
   {Multi weight font for jlreq class}
 
 % --------------------------------------------------
+% load packeges
 
-\RequirePackage{l3keys2e,xparse}
+\RequirePackage{l3keys2e}
 
 % --------------------------------------------------
+% Variables
 
-\tl_new:N \l_jldx_preset_tl
-\bool_new:N \l_jldx_jis_mmiv_bool
-\bool_new:N \l_jldx_unicode_bool
+\tl_new:N \l__jldx_prefix_tl
+\tl_new:N \l__jldx_scale_tl
+\bool_new:N \l__jldx_hanging_punctuation_bool
+\bool_new:N \l__jldx_zenkakunibu_nibu_bool
+\bool_new:N \l__jldx_deluxe_bool
 
-%% options
+\bool_set_true:N \l__jldx_deluxe_bool
+
+% --------------------------------------------------
+% Messages
+
+\msg_new:nnn { jlreq-deluxe } { option-not-available }
+  { The~`#1'~option~is~not~available. }
+
+% --------------------------------------------------
+% Helpers
+
+\prg_set_conditional:Npnn \__jldx_if_class_loaded:n #1 { p , T , F , TF }
+  {
+    \@ifclassloaded {#1}
+      { \prg_return_true: }
+      { \prg_return_false: }
+  }
+
+% --------------------------------------------------
+%% Options
+
 \keys_define:nn { jlreq-deluxe }
   {
-    % uniweight
-    ms    .code:n = { \tl_set:Nn \l_jldx_preset_tl { ms    } },
-    ipa   .code:n = { \tl_set:Nn \l_jldx_preset_tl { ipa   } },
-    ipaex .code:n = { \tl_set:Nn \l_jldx_preset_tl { ipaex } },
-    % multiweight
-    ms-hg                   .code:n = { \tl_set:Nn \l_jldx_preset_tl { ms-hg                   } },
-    ipa-hg                  .code:n = { \tl_set:Nn \l_jldx_preset_tl { ipa-hg                  } },
-    ipaex-hg                .code:n = { \tl_set:Nn \l_jldx_preset_tl { ipaex-hg                } },
-    moga-mobo               .code:n = { \tl_set:Nn \l_jldx_preset_tl { moga-mobo               } },
-    moga-mobo-ex            .code:n = { \tl_set:Nn \l_jldx_preset_tl { moga-mobo-ex            } },
-    moga-maruberi           .code:n = { \tl_set:Nn \l_jldx_preset_tl { moga-maruberi           } },
-    ume                     .code:n = { \tl_set:Nn \l_jldx_preset_tl { ume                     } },
-    kozuka-pro              .code:n = { \tl_set:Nn \l_jldx_preset_tl { kozuka-pro              } },
-    kozuka-pr6              .code:n = { \tl_set:Nn \l_jldx_preset_tl { kozuka-pr6              } },
-    kozuka-pr6n             .code:n = { \tl_set:Nn \l_jldx_preset_tl { kozuka-pr6n             } },
-    hiragino-pro            .code:n = { \tl_set:Nn \l_jldx_preset_tl { hiragino-pro            } },
-    hiragino-pron           .code:n = { \tl_set:Nn \l_jldx_preset_tl { hiragino-pron           } },
-    hiragino-elcapitan-pro  .code:n = { \tl_set:Nn \l_jldx_preset_tl { hiragino-elcapitan-pro  } },
-    hiragino-elcapitan-pron .code:n = { \tl_set:Nn \l_jldx_preset_tl { hiragino-elcapitan-pron } },
-    morisawa-pro            .code:n = { \tl_set:Nn \l_jldx_preset_tl { morisawa-pro            } },
-    morisawa-pr6n           .code:n = { \tl_set:Nn \l_jldx_preset_tl { morisawa-pr6n           } },
-    yu-win                  .code:n = { \tl_set:Nn \l_jldx_preset_tl { yu-win                  } },
-    yu-win10                .code:n = { \tl_set:Nn \l_jldx_preset_tl { yu-win10                } },
-    yu-osx                  .code:n = { \tl_set:Nn \l_jldx_preset_tl { yu-osx                  } },
-    sourcehan-otc           .code:n = { \tl_set:Nn \l_jldx_preset_tl { sourcehan-otc           } },
-    sourcehan               .code:n = { \tl_set:Nn \l_jldx_preset_tl { sourcehan               } },
-    sourcehan-jp            .code:n = { \tl_set:Nn \l_jldx_preset_tl { sourcehan-jp            } },
-    noto-otc                .code:n = { \tl_set:Nn \l_jldx_preset_tl { noto-otc                } },
-    noto                    .code:n = { \tl_set:Nn \l_jldx_preset_tl { noto                    } },
-    noto-jp                 .code:n = { \tl_set:Nn \l_jldx_preset_tl { noto-jp                 } },
-    haranoaji               .code:n = { \tl_set:Nn \l_jldx_preset_tl { haranoaji               } },
-    % jis2004
-    jis2004 .code:n = { \bool_set_true:N \l_jldx_jis_mmiv_bool },
-    % unicode
-    unicode .code:n = { \bool_set_true:N \l_jldx_unicode_bool }
+    deluxe .bool_set:N = \l__jldx_deluxe_bool
   }
-\ProcessKeysOptions { jlreq-deluxe }
 
-\clist_map_inline:nn { sourcehan , sourcehan-otc , sourcehan-jp , noto , noto-otc , noto-jp }
+\keys_define:nn { jlreq-deluxe }
   {
-    \tl_set:Nn \l_tmpa_tl {#1}
-    \tl_if_eq:NNT \l_jldx_preset_tl \l_tmpa_tl
+    expert .code:n =
       {
-        \bool_set_true:N \l_jldx_unicode_bool
+        \msg_error:nnn { jlreq-deluxe } { option-not-available }
+          { expert }
       }
   }
 
+\keys_define:nn { jlreq-deluxe }
+  {
+    burasage .code:n =
+      {
+        \msg_error:nnn { jlreq-deluxe } { option-not-available }
+          { burasage }
+      }
+  }
+
+\keys_define:nn { jlreq-deluxe }
+  {
+    scale .tl_set:N = \l__jldx_scale_tl
+  }
+
+\keys_define:nn { jlreq-deluxe }
+  {
+    hanging_punctuation .bool_set:N = \l__jldx_hanging_punctuation_bool
+  }
+
+\keys_define:nn { jlreq-deluxe }
+  {
+    zenkakunibu_nibu .bool_set:N = \l__jldx_zenkakunibu_nibu_bool
+  }
+
+\keys_define:nn { jlreq-deluxe }
+  {
+    unknown .code:n =
+      {
+        \PassOptionsToPackage { \CurrentOption } { pxjodel }
+      }
+  }
+
+\ProcessKeysOptions { jlreq-deluxe }
 
 % --------------------------------------------------
-% LaTeX2e
+%% jlreq parameters
 
-%% \__jldx_not_math_alphabet:NN \csA \csB
-\cs_new_eq:Nc \__jldx_not_math_alphabet:NN { not@math@alphabet }
-
-
-% --------------------------------------------------
-
-%% font encoding
-\tl_new:N \l_jldx_JYn_tl
-\tl_new:N \l_jldx_JTn_tl
-\tl_new:N \l_jldx_OTorT_tl
-\sys_if_engine_uptex:TF
-  {
-    \tl_set:Nn \l_jldx_JYn_tl { JY2 }
-    \tl_set:Nn \l_jldx_JTn_tl { JT2 }
-    \tl_set:Nn \l_jldx_OTorT_tl { T }
-  }
-  {
-    \tl_set:Nn \l_jldx_JYn_tl { JY1 }
-    \tl_set:Nn \l_jldx_JTn_tl { JT1 }
-    \tl_set:Nn \l_jldx_OTorT_tl { OT }
-  }
-
-%% jlreq jafontscale
-\tl_new:N \l_jldx_jafontscale_tl
-\cs_if_exist:NTF \Cjascale
-  {
-    \tl_set:Nx \l_jldx_jafontscale_tl { \Cjascale }
-  }
+\__jldx_if_class_loaded:nT { jlreq }
   {
     \jlreq@divide { \jlreq@jafontsize } { \jlreq@fontsize }
-    \tl_set:Nx \l_jldx_jafontscale_tl
+    \tl_set:Nx \l__jldx_scale_tl
       {
         \strip@pt \jlreq@resultdimen
       }
+    \bool_set:Nn \l__jldx_zenkakunibu_nibu_bool
+      {
+        \str_if_eq_p:no { zenkakunibu_nibu } { \jlreq@open@bracket@pos }
+      }
+    \bool_set:Nn \l__jldx_hanging_punctuation_bool
+      {
+        \legacy_if_p:n { jlreq@burasage }
+      }
   }
 
-%% jlreq font prefix
-\tl_new:N \l_jldx_prefix_tl
-% upTeX
-\sys_if_engine_uptex:T
+% --------------------------------------------------
+%% prefix
+
+\tl_set:Nn \l__jldx_prefix_tl { jlreq }
+
+% zenkakunibu_nibu
+\bool_if:NT \l__jldx_zenkakunibu_nibu_bool
   {
-    \tl_put_right:Nn \l_jldx_prefix_tl { u }
+    \tl_put_left:Nn \l__jldx_prefix_tl { z }
   }
 % hanging_punctuation
-\legacy_if:nT { jlreq@burasage }
+\bool_if:NT \l__jldx_hanging_punctuation_bool
   {
-    \tl_put_right:Nn \l_jldx_prefix_tl { b }
-  }
-% zenkakunibu_nibu
-\str_if_eq:noT { zenkakunibu_nibu } { \jlreq@open@bracket@pos }
-  {
-    \tl_put_right:Nn \l_jldx_prefix_tl { z }
+    \tl_put_left:Nn \l__jldx_prefix_tl { b }
   }
 
 % --------------------------------------------------
+% pxjodel
 
-\cs_new:Npn \__jldx_declare_font_family:n #1 {
-  \DeclareFontFamily { \l_jldx_JYn_tl } {#1} { }
-  \DeclareFontFamily { \l_jldx_JTn_tl } {#1} { }
-}
+% jlreq jafont scale
+\PassOptionsToPackage { prefix = \l__jldx_prefix_tl } { pxjodel }
 
-\cs_new:Npn \jldx_declare_relation_font:nnnnnn #1#2#3#4#5 {
-  \DeclareRelationFont { \l_jldx_JYn_tl } {#1} {#2} { } {#3} {#4} {#5} { }
-  \DeclareRelationFont { \l_jldx_JTn_tl } {#1} {#2} { } {#3} {#4} {#5} { }
-}
-
-\cs_new:Npn \jldx_declare_font_shape:nnn #1#2#3 {
-  \DeclareFontShape { \l_jldx_JYn_tl } {#1} {#2} {n} { <->s*[ \l_jldx_jafontscale_tl ] \l_jldx_prefix_tl jldx#3-h } { }
-  \DeclareFontShape { \l_jldx_JTn_tl } {#1} {#2} {n} { <->s*[ \l_jldx_jafontscale_tl ] \l_jldx_prefix_tl jldx#3-v } { }
-}
-
-\DeclareErrorKanjiFont { \l_jldx_JYn_tl } { mc } { m } { n } { 10 }
-\DeclareKanjiSubstitution { \l_jldx_JYn_tl } { mc } { m } { n }
-\DeclareKanjiSubstitution { \l_jldx_JTn_tl } { mc } { m } { n }
-
-\cs_set:Npn \mcdefault { hmc }
-\cs_set:Npn \gtdefault { hgt }
-\cs_set:Npn \mgdefault { mg }
-\cs_set:Npn \ebdefault { eb }
-\cs_set:Npn \ltdefault { l }
-
-\DeclareMathAlphabet \mathmg { \l_jldx_JYn_tl } { mg } { m } { n }
-
-\DeclareRobustCommand \mgfamily {
-  \__jldx_not_math_alphabet:NN \mgfamily \mathmg
-  \kanjifamily\mgdefault\selectfont
-}
-\DeclareRobustCommand \ebseries {
-  \__jldx_not_math_alphabet:NN \ebseries \relax
-  \kanjiseries\ebdefault\selectfont
-}
-\DeclareRobustCommand \ltseries {
-  \__jldx_not_math_alphabet:NN \ltseries \relax
-  \kanjiseries\ltdefault\selectfont
-}
-
-\DeclareTextFontCommand \textmg \mgfamily
-
-% mincho
-\__jldx_declare_font_family:n { hmc }
-\jldx_declare_relation_font:nnnnnn { hmc } { m  } { \l_jldx_OTorT_tl 1 } { cmr } { m  }
-\jldx_declare_relation_font:nnnnnn { hmc } { bx } { \l_jldx_OTorT_tl 1 } { cmr } { bx }
-\jldx_declare_font_shape:nnn { hmc } { l  } { ml }
-\jldx_declare_font_shape:nnn { hmc } { m  } { mr }
-\jldx_declare_font_shape:nnn { hmc } { bx } { mb }
-
-% gothic
-\__jldx_declare_font_family:n { hgt }
-\jldx_declare_relation_font:nnnnnn { hgt } { m  } { \l_jldx_OTorT_tl 1 } { cmss } { m  }
-\jldx_declare_relation_font:nnnnnn { hgt } { bx } { \l_jldx_OTorT_tl 1 } { cmss } { bx }
-\jldx_declare_font_shape:nnn { hgt } { m  } { gr }
-\jldx_declare_font_shape:nnn { hgt } { bx } { gb }
-\jldx_declare_font_shape:nnn { hgt } { eb } { ge }
-
-% maru gothic
-\__jldx_declare_font_family:n { mg }
-\jldx_declare_relation_font:nnnnnn { mg } { m  } { \l_jldx_OTorT_tl 1 } { cmss } { m }
-\jldx_declare_font_shape:nnn { mg } { m } { mgr }
-
-
-% --------------------------------------------------
-% utf/cid fonts
-
-\NewDocumentCommand \UTF { m } {
-  \jldx_utf:n { #1 }
-}
-\NewDocumentCommand \CID { m } {
-  \jldx_cid:n { #1 }
-}
-
-\cs_new:Npn \jldx_utf:n #1
+% jlreq jafont scale
+\tl_if_empty:NF \l__jldx_scale_tl
   {
-    \exp_args:Nnf \__jldx_otf:nn { utfj } { \int_from_hex:n { #1 } }
-  }
-\cs_new:Npn \jldx_cid:n #1
-  {
-    \__jldx_otf:nn { cidj } { #1 }
+    \PassOptionsToPackage { scale = \l__jldx_scale_tl } { pxjodel }
   }
 
-% \__jldx_otf:nn { utfj | cidj } { <char code> }
-\cs_new:Npn \__jldx_otf:nn #1#2
+% deluxe
+\bool_if:NT \l__jldx_deluxe_bool
   {
-    \group_begin:
-      \__jldx_otf_select_kanjifamily:n { #1 }
-      \kanjishape { \__jldx_otf_get_shape:n { #2 } }
-      \selectfont
-      % in  = c0 * 0x1000 + c1 + 0x40 + c2 
-      % out = c1 * 0x100 + c2
-      \int_set:Nn \l_tmpb_int
-        { \int_mod:nn { #2 } { "1000 } }
-      \int_set:Nn \l_tmpa_int
-        { \int_div_truncate:nn { \l_tmpb_int } { "40 } * "100 + \int_mod:nn { \l_tmpb_int } { "40 } }
-      \sys_if_engine_uptex:TF
-        {
-          \tex_char:D \int_eval:n { \l_tmpa_int + "113030 } \scan_stop:
-        }
-        {
-          \tex_char:D \tex_jis:D \int_eval:n { \l_tmpa_int + "3030 } \scan_stop:
-        } 
-    \group_end:
+    \PassOptionsToPackage { deluxe } { pxjodel }
   }
 
-\tl_new:N \l__jldx_mcdefault_tl
-\tl_new:N \l__jldx_gtdefault_tl
-\tl_new:N \l__jldx_mgdefault_tl
-
-% \__jldx_otf_select_kanjifamily:n {<prefix>}
-\cs_new:Npn \__jldx_otf_get_kanjifamily:nN #1#2
-  {
-    \tl_set:Nx \l__jldx_mcdefault_tl { \mcdefault }
-    \tl_set:Nx \l__jldx_gtdefault_tl { \gtdefault }
-    \tl_set:Nx \l__jldx_mgdefault_tl { \mgdefault }
-    \tl_case:NnF \k@family
-      {
-        \l__jldx_mcdefault_tl { \tl_set:Nn #2 {#1} }
-        \l__jldx_gtdefault_tl { \tl_set:Nn #2 {#1g} }
-        \l__jldx_mgdefault_tl { \tl_set:Nn #2 {#1mg} }
-      }
-      { \tl_set:Nn #2 {#1} }
-  }
-
-\tl_new:N \l__jldx_otf_kanjifamily_tl
-
-% \__jldx_otf_select_kanjifamily:n {<prefix>}
-\cs_new:Npn \__jldx_otf_select_kanjifamily:n #1
-  {
-    \__jldx_otf_get_kanjifamily:nN {#1} \l__jldx_otf_kanjifamily_tl
-    \kanjifamily { \l__jldx_otf_kanjifamily_tl }
-  }
-
-% \__jldx_otf_get_shape:n {<code>}
-\cs_new:Npn \__jldx_otf_get_shape:n #1
-  {
-    \int_case:nn { \int_div_truncate:nn { #1 } { "1000 } }
-      {
-        {  0 } { 0 }
-        {  1 } { 1 }
-        {  2 } { 2 }
-        {  3 } { 3 }
-        {  4 } { 4 }
-        {  5 } { 5 }
-        {  6 } { 6 }
-        {  7 } { 7 }
-        {  8 } { 8 }
-        {  9 } { 9 }
-        { 10 } { a }
-        { 11 } { b }
-        { 12 } { c }
-        { 13 } { d }
-        { 14 } { e }
-        { 15 } { f }
-        { 27 } { g } % 1Bxxx
-        { 29 } { h } % 1Dxxx
-        { 30 } { i } % 1Exxx
-        { 31 } { j } % 1Fxxx
-        { 32 } { k } % 20xxx
-        { 33 } { l } % 21xxx
-        { 34 } { m } % 22xxx
-        { 35 } { n } % 23xxx
-        { 36 } { o } % 24xxx
-        { 37 } { p } % 25xxx
-        { 38 } { q } % 26xxx
-        { 39 } { r } % 27xxx
-        { 40 } { s } % 28xxx
-        { 41 } { t } % 29xxx
-        { 42 } { u } % 2Axxx
-        { 43 } { v } % 2Bxxx
-        { 44 } { w } % 2Cxxx
-        { 45 } { x } % 2Dxxx
-        { 46 } { y } % 2Exxx
-        { 47 } { z } % 2Fxxx
-      }
-  }
-
-% \__jldx_declare_font_shape_otf:nnnn {<family>} {<series>} {<shape list>} {<tfm base>}
-\cs_new:Npn \__jldx_declare_font_shape_otf:nnnn #1#2#3#4
-  {
-    \tl_map_inline:nn { #3 }
-      {
-        \__jldx_declare_font_shape_otf_aux:nnnn { #1 } { #2 } { ##1 } { #4 }
-      }
-  }
-% \__jldx_declare_font_shape_otf_aux:nnnn {<family>} {<series>} {<shape>} {<tfm base>}
-\cs_new:Npn \__jldx_declare_font_shape_otf_aux:nnnn #1#2#3#4
-  {
-    \DeclareFontShape { \l_jldx_JYn_tl } {#1} {#2} {#3} { <->s*[ \l_jldx_jafontscale_tl ] #4#3-h } { }
-    \DeclareFontShape { \l_jldx_JTn_tl } {#1} {#2} {#3} { <->s*[ \l_jldx_jafontscale_tl ] #4#3-v } { }
-  }
-
-% \__jldx_declare_font_shapes_utf:nnn {<family>} {<series>} {<tfm base>}
-\cs_new:Npn \__jldx_declare_font_shapes_utf:nnn #1#2#3
-  {
-    \__jldx_declare_font_shape_otf:nnnn { #1 } { #2 } { 0123456789abcdefjklmnopqrstuvxyz } { #3 }
-  }
-% \__jldx_declare_font_shapes_cid:nnn {<family>} {<series>} {<tfm base>}
-\cs_new:Npn \__jldx_declare_font_shapes_cid:nnn #1#2#3
-  {
-    \__jldx_declare_font_shape_otf:nnnn { #1 } { #2 } { 012345 } { #3 }
-  }
-
-\__jldx_declare_font_family:n { utfj }
-\__jldx_declare_font_family:n { cidj }
-\__jldx_declare_font_shapes_utf:nnn { utfj } { l  } { utfjml }
-\__jldx_declare_font_shapes_cid:nnn { cidj } { l  } { cidjml }
-\__jldx_declare_font_shapes_utf:nnn { utfj } { m  } { utfjmr }
-\__jldx_declare_font_shapes_cid:nnn { cidj } { m  } { cidjmr }
-\__jldx_declare_font_shapes_utf:nnn { utfj } { bx } { utfjmb }
-\__jldx_declare_font_shapes_cid:nnn { cidj } { bx } { cidjmb }
-\__jldx_declare_font_family:n { utfjg }
-\__jldx_declare_font_family:n { cidjg }
-\__jldx_declare_font_shapes_utf:nnn { utfjg } { m  } { utfjgr }
-\__jldx_declare_font_shapes_cid:nnn { cidjg } { m  } { cidjgr }
-\__jldx_declare_font_shapes_utf:nnn { utfjg } { bx } { utfjgb }
-\__jldx_declare_font_shapes_cid:nnn { cidjg } { bx } { cidjgb }
-\__jldx_declare_font_shapes_utf:nnn { utfjg } { eb } { utfjge }
-\__jldx_declare_font_shapes_cid:nnn { cidjg } { eb } { cidjge }
-\__jldx_declare_font_family:n { utfjmg }
-\__jldx_declare_font_family:n { cidjmg }
-\__jldx_declare_font_shapes_utf:nnn { utfjmg } { m } { utfjmgr }
-\__jldx_declare_font_shapes_cid:nnn { cidjmg } { m } { cidjmgr }
-
-% --------------------------------------------------
-% font map
-
-\cs_new:Npn \__jldx_set_font_map_jlreq:nn #1#2
-  {
-    \sys_if_engine_uptex:TF
-      {
-        \bool_if:NTF \l_jldx_unicode_bool
-          {
-            \bool_if:NTF \l_jldx_jis_mmiv_bool
-              {
-                \AtBeginDvi{
-                  \special { pdf:mapline ~ r-ujldx#1-h  ~ unicode ~ #2        ~ -l~jp04 }
-                  \special { pdf:mapline ~ r-ujldx#1-v  ~ unicode ~ #2 ~ -w~1 ~ -l~jp04 }
-                  \special { pdf:mapline ~ r-ujldx#1-hq ~ unicode ~ #2        ~ -l~fwid }
-                }
-              }
-              {
-                \AtBeginDvi{
-                  \special { pdf:mapline ~ r-ujldx#1-h  ~ unicode ~ #2        ~ -l~jp90 }
-                  \special { pdf:mapline ~ r-ujldx#1-v  ~ unicode ~ #2 ~ -w~1 ~ -l~jp90 }
-                  \special { pdf:mapline ~ r-ujldx#1-hq ~ unicode ~ #2        ~ -l~fwid }
-                }
-              }
-          }
-          {
-            \bool_if:NTF \l_jldx_jis_mmiv_bool
-              {
-                \AtBeginDvi{
-                  \special { pdf:mapline ~ r-ujldx#1-h  ~ UniJIS2004-UTF16-H ~ #2 }
-                  \special { pdf:mapline ~ r-ujldx#1-v  ~ UniJIS2004-UTF16-V ~ #2 }
-                  \special { pdf:mapline ~ r-ujldx#1-hq ~ UniJIS-UCS2-H      ~ #2 }
-                }
-              }
-              {
-                \AtBeginDvi{
-                  \special { pdf:mapline ~ r-ujldx#1-h  ~ UniJIS-UTF16-H ~ #2 }
-                  \special { pdf:mapline ~ r-ujldx#1-v  ~ UniJIS-UTF16-V ~ #2 }
-                  \special { pdf:mapline ~ r-ujldx#1-hq ~ UniJIS-UCS2-H  ~ #2 }
-                }
-              }
-          }
-      }
-      {
-        \bool_if:NTF \l_jldx_jis_mmiv_bool
-          {
-            \AtBeginDvi{
-              \special{pdf:mapline ~ r-jldx#1-h ~ 2004-H ~ #2 }
-              \special{pdf:mapline ~ r-jldx#1-v ~ 2004-V ~ #2 }
-            }
-          }
-          {
-            \AtBeginDvi{
-              \special{pdf:mapline ~ r-jldx#1-h ~ H ~ #2 }
-              \special{pdf:mapline ~ r-jldx#1-v ~ V ~ #2 }
-            }
-          }
-      }
-  }
-\cs_generate_variant:Nn \__jldx_set_font_map_jlreq:nn { n x }
-
-\cs_new:Npn \__jldx_set_font_map_otf:nn #1#2
-  {
-    \bool_if:NTF \l_jldx_unicode_bool
-      {
-        \bool_if:NTF \l_jldx_jis_mmiv_bool
-          {
-            \AtBeginDvi{
-              \special{pdf:mapline ~ otf-uj#1-h ~ unicode ~ #2        ~ -l~fwid:jp04 }
-              \special{pdf:mapline ~ otf-uj#1-v ~ unicode ~ #2 ~ -w~1 ~ -l~fwid:jp04 }
-            }
-          }
-          {
-            \AtBeginDvi{
-              \special{pdf:mapline ~ otf-uj#1-h ~ unicode ~ #2        ~ -l~fwid:jp90 }
-              \special{pdf:mapline ~ otf-uj#1-v ~ unicode ~ #2 ~ -w~1 ~ -l~fwid:jp90 }
-            }
-          }
-        \AtBeginDvi{
-          \special{pdf:mapline ~ -otf-cj#1-h }
-          \special{pdf:mapline ~ -otf-cj#1-v }
-        }
-      }
-      {
-        \bool_if:NTF \l_jldx_jis_mmiv_bool
-          {
-            \AtBeginDvi{
-              \special{pdf:mapline ~ otf-uj#1-h ~ UniJIS2004-UTF16-H ~ #2 }
-              \special{pdf:mapline ~ otf-uj#1-v ~ UniJIS2004-UTF16-V ~ #2 }
-            }
-          }
-          {
-            \AtBeginDvi{
-              \special{pdf:mapline ~ otf-uj#1-h ~ UniJIS-UTF16-H ~ #2 }
-              \special{pdf:mapline ~ otf-uj#1-v ~ UniJIS-UTF16-V ~ #2 }
-            }
-          }
-        \AtBeginDvi{
-          \special{pdf:mapline ~ otf-cj#1-h ~ Identity-H ~ #2/AJ17 }
-          \special{pdf:mapline ~ otf-cj#1-v ~ Identity-V ~ #2/AJ17 }
-        }
-      }
-  }
-\cs_generate_variant:Nn \__jldx_set_font_map_otf:nn { n x }
-
-\cs_new:Npn \__jldx_set_font_map:nn #1#2
-  {
-    \__jldx_set_font_map_jlreq:nn {#1} {#2}
-    \__jldx_set_font_map_otf:nn {#1} {#2}
-  }
-\cs_generate_variant:Nn \__jldx_set_font_map:nn { n x }
-
-
-\cs_new:Npn \__jldx_set_multiweight:nnnnnnn #1#2#3#4#5#6#7
-  {
-    \__jldx_set_font_map:nn { ml  } { #1 }
-    \__jldx_set_font_map:nn { mr  } { #2 }
-    \__jldx_set_font_map:nn { mb  } { #3 }
-    \__jldx_set_font_map:nn { gr  } { #4 }
-    \__jldx_set_font_map:nn { gb  } { #5 }
-    \__jldx_set_font_map:nn { ge  } { #6 }
-    \__jldx_set_font_map:nn { mgr } { #7 }
-  }
-
-\cs_new:Npn \__jldx_set_uniweight:nn #1#2
-  {
-    \__jldx_set_multiweight:nnnnnnn { #1 } { #1 } { #1 } { #2 } { #2 } { #2 } { #2 }
-  }
-
-\NewDocumentCommand \setminchofont { o m }
-  {
-    \__jldx_set_font_map:nx { ml  } { \IfValueT{#1}{:#1:} #2 }
-    \__jldx_set_font_map:nx { mr  } { \IfValueT{#1}{:#1:} #2 }
-    \__jldx_set_font_map:nx { mb  } { \IfValueT{#1}{:#1:} #2 }
-  }
-\NewDocumentCommand \setgothicfont { o m }
-  {
-    \__jldx_set_font_map:nx { gr  } { \IfValueT{#1}{:#1:} #2 }
-    \__jldx_set_font_map:nx { gb  } { \IfValueT{#1}{:#1:} #2 }
-    \__jldx_set_font_map:nx { ge  } { \IfValueT{#1}{:#1:} #2 }
-  }
-\NewDocumentCommand \setlightminchofont { o m }
-  {
-    \__jldx_set_font_map:nx { ml  } { \IfValueT{#1}{:#1:} #2 }
-  }
-\NewDocumentCommand \setmediumminchofont { o m }
-  {
-    \__jldx_set_font_map:nx { mr  } { \IfValueT{#1}{:#1:} #2 }
-  }
-\NewDocumentCommand \setboldminchofont { o m }
-  {
-    \__jldx_set_font_map:nx { mb  } { \IfValueT{#1}{:#1:} #2 }
-  }
-\NewDocumentCommand \setmediumgothicfont { o m }
-  {
-    \__jldx_set_font_map:nx { gr  } { \IfValueT{#1}{:#1:} #2 }
-  }
-\NewDocumentCommand \setboldgothicfont { o m }
-  {
-    \__jldx_set_font_map:nx { gb  } { \IfValueT{#1}{:#1:} #2 }
-  }
-\NewDocumentCommand \setxboldgothicfont { o m }
-  {
-    \__jldx_set_font_map:nx { ge  } { \IfValueT{#1}{:#1:} #2 }
-  }
-\NewDocumentCommand \setmarugothicfont { o m }
-  {
-    \__jldx_set_font_map:nx { mgr } { \IfValueT{#1}{:#1:} #2 }
-  }
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% preset
-
-\prop_new:N \g_jldx_preset_prop
-
-% uniweight
-\prop_gput:Nnn \g_jldx_preset_prop { ms }
-  {
-    \__jldx_set_uniweight:nn { :0:msmincho.ttc } { :0:msgothic.ttc }
-  }
-\prop_gput:Nnn \g_jldx_preset_prop { ipa }
-  {
-    \__jldx_set_uniweight:nn { ipam.ttf } { ipag.ttf }
-  }
-\prop_gput:Nnn \g_jldx_preset_prop { ipaex }
-  {
-    \__jldx_set_uniweight:nn { ipaexm.ttf } { ipaexg.ttf }
-  }
-% multiweight
-\prop_gput:Nnn \g_jldx_preset_prop { ms-hg }
-  {
-    \__jldx_set_multiweight:nnnnnnn
-      { :0:msmincho.ttc } { :0:msmincho.ttc } { :0:hgrme.ttc }
-      { :0:hgrgm.ttc } { :0:hgrge.ttc } { :0:hgrsgu.ttc } { hgrsmp.ttf }
-  }
-\prop_gput:Nnn \g_jldx_preset_prop { ipa-hg }
-  {
-    \__jldx_set_multiweight:nnnnnnn
-      { ipam.ttf } { ipam.ttf } { :0:hgrme.ttc }
-      { :0:hgrgm.ttc } { :0:hgrge.ttc } { :0:hgrsgu.ttc } { hgrsmp.ttf }
-  }
-\prop_gput:Nnn \g_jldx_preset_prop { ipaex-hg }
-  {
-    \__jldx_set_multiweight:nnnnnnn
-      { ipaexm.ttf } { ipaexm.ttf } { :0:hgrme.ttc }
-      { :0:hgrgm.ttc } { :0:hgrge.ttc } { :0:hgrsgu.ttc } { hgrsmp.ttf }
-  }
-\prop_gput:Nnn \g_jldx_preset_prop { moga-mobo }
-  {
-    \__jldx_set_multiweight:nnnnnnn
-      { :0:mogam.ttc } { :0:mogam.ttc } { :0:mogamb.ttc }
-      { :0:mogag.ttc } { :0:mogagb.ttc } { :0:mogagb.ttc } { :0:mobog.ttc }
-  }
-\prop_gput:Nnn \g_jldx_preset_prop { moga-mobo-ex }
-  {
-    \__jldx_set_multiweight:nnnnnnn
-      { :1:mogam.ttc } { :1:mogam.ttc } { :1:mogamb.ttc }
-      { :1:mogag.ttc } { :1:mogagb.ttc } { :1:mogagb.ttc } { :1:mobog.ttc }
-  }
-\prop_gput:Nnn \g_jldx_preset_prop { moga-maruberi }
-  {
-    \__jldx_set_multiweight:nnnnnnn
-      { :0:mogam.ttc } { :0:mogam.ttc } { :0:mogamb.ttc }
-      { :0:mogag.ttc } { :0:mogagb.ttc } { :0:mogagb.ttc } { MTLmr3m.ttf }
-  }
-\prop_gput:Nnn \g_jldx_preset_prop { ume }
-  {
-    \__jldx_set_multiweight:nnnnnnn
-      { ume-tmo3.ttf } { ume-tmo3.ttf } { ume-tmo3.ttf }
-      { ume-tgo4.ttf } { ume-tgo5.ttf } { ume-tgo5.ttf } { ume-tgo4.ttf }
-  }
-\prop_gput:Nnn \g_jldx_preset_prop { kozuka-pro }
-  {
-    \__jldx_set_multiweight:nnnnnnn
-      { KozMinPro-Light.otf } { KozMinPro-Regular.otf } { KozMinPro-Bold.otf }
-      { KozGoPro-Regular.otf } { KozGoPro-Bold.otf } { KozGoPro-Heavy.otf } { KozGoPro-Heavy.otf }
-  }
-\prop_gput:Nnn \g_jldx_preset_prop { kozuka-pr6 }
-  {
-    \__jldx_set_multiweight:nnnnnnn
-      { KozMinProVI-Light.otf } { KozMinProVI-Regular.otf } { KozMinProVI-Bold.otf }
-      { KozGoProVI-Regular.otf } { KozGoProVI-Bold.otf } { KozGoProVI-Heavy.otf } { KozGoProVI-Heavy.otf }
-  }
-\prop_gput:Nnn \g_jldx_preset_prop { kozuka-pr6n }
-  {
-    \__jldx_set_multiweight:nnnnnnn
-      { KozMinPr6N-Light.otf } { KozMinPr6N-Regular.otf } { KozMinPr6N-Bold.otf }
-      { KozGoPr6N-Regular.otf } { KozGoPr6N-Bold.otf } { KozGoPr6N-Heavy.otf } { KozGoPr6N-Heavy.otf }
-  }
-\prop_gput:Nnn \g_jldx_preset_prop { hiragino-pro }
-  {
-    \__jldx_set_multiweight:nnnnnnn
-      { HiraMinPro-W2.otf } { HiraMinPro-W3.otf } { HiraMinPro-W6.otf }
-      { HiraKakuPro-W3.otf } { HiraKakuPro-W6.otf } { HiraKakuStd-W8.otf } { HiraMaruPro-W4.otf }
-  }
-\prop_gput:Nnn \g_jldx_preset_prop { hiragino-pron }
-  {
-    \__jldx_set_multiweight:nnnnnnn
-      { HiraMinProN-W2.otf } { HiraMinProN-W3.otf } { HiraMinProN-W6.otf }
-      { HiraKakuProN-W3.otf } { HiraKakuProN-W6.otf } { HiraKakuStdN-W8.otf } { HiraMaruProN-W4.otf }
-  }
-\prop_gput:Nnn \g_jldx_preset_prop { hiragino-elcapitan-pro }
-  {
-    \__jldx_set_multiweight:nnnnnnn
-      { HiraMinPro-W2.otf } { :1:HiraginoSerif-W3.ttc } { :1:HiraginoSerif-W6.ttc }
-      { :3:HiraginoSans-W3.ttc } { :3:HiraginoSans-W6.ttc } { :2:HiraginoSans-W8.ttc } { :0:HiraginoSansR-W4.ttc }
-  }
-\prop_gput:Nnn \g_jldx_preset_prop { hiragino-elcapitan-pron }
-  {
-    \__jldx_set_multiweight:nnnnnnn
-      { HiraMinProN-W2.otf } { :0:HiraginoSerif-W3.ttc } { :0:HiraginoSerif-W6.ttc }
-      { :2:HiraginoSans-W3.ttc } { :2:HiraginoSans-W6.ttc } { :3:HiraginoSans-W8.ttc } { :1:HiraginoSansR-W4.ttc }
-  }
-\prop_gput:Nnn \g_jldx_preset_prop { morisawa-pro }
-  {
-    \__jldx_set_multiweight:nnnnnnn
-      { A-OTF-RyuminPro-Light.otf } { A-OTF-RyuminPro-Light.otf } { A-OTF-FutoMinA101Pro-Bold.otf }
-      { A-OTF-GothicBBBPro-Medium.otf } { A-OTF-FutoGoB101Pro-Bold } { A-OTF-MidashiGoPro-MB31.otf } { A-OTF-Jun101Pro-Light.otf }
-  }
-\prop_gput:Nnn \g_jldx_preset_prop { morisawa-pr6n }
-  {
-    \__jldx_set_multiweight:nnnnnnn
-      { A-OTF-RyuminPr6N-Light.otf } { A-OTF-RyuminPr6N-Light.otf } { A-OTF-FutoMinA101Pr6N-Bold.otf }
-      { A-OTF-GothicBBBPr6N-Medium.otf } { A-OTF-FutoGoB101Pr6N-Bold } { A-OTF-MidashiGoPr6N-MB31.otf } { A-OTF-Jun101Pro-Light.otf }
-  }
-\prop_gput:Nnn \g_jldx_preset_prop { yu-win }
-  {
-    \__jldx_set_multiweight:nnnnnnn
-      { yuminl.ttf } { yumin.ttf } { yumindb.ttf }
-      { yugothic.ttf } { yugothib.ttf } { yugothib.ttf } { yugothic.ttf }
-  }
-\prop_gput:Nnn \g_jldx_preset_prop { yu-win10 }
-  {
-    \__jldx_set_multiweight:nnnnnnn
-      { yuminl.ttf } { yumin.ttf } { yumindb.ttf }
-      { :0:YuGothR.ttc } { :0:YuGothB.ttc } { :0:YuGothB.ttc } { :0:YuGothM.ttc }
-  }
-\prop_gput:Nnn \g_jldx_preset_prop { yu-osx }
-  {
-    \__jldx_set_multiweight:nnnnnnn
-      { YuMin-Medium.otf } { YuMin-Medium.otf } { YuMin-Demibold.otf }
-      { YuGo-Medium.otf } { YuGo-Bold.otf } { YuGo-Bold.otf } { YuGo-Medium.otf }
-  }
-% Source Han Sans/Serif, "OTC"
-\prop_gput:Nnn \g_jldx_preset_prop { sourcehan-otc }
-  {
-    \__jldx_set_multiweight:nnnnnnn
-      { :0:SourceHanSerif-Light.ttc } { :0:SourceHanSerif-Regular.ttc } { :0:SourceHanSerif-Bold.ttc }
-      { :0:SourceHanSans-Regular.ttc } { :0:SourceHanSans-Bold.ttc } { :0:SourceHanSans-Heavy.ttc } { :0:SourceHanSans-Medium.ttc }
-  }
-% Source Han Sans/Serif, "Language-specific OTF"
-\prop_gput:Nnn \g_jldx_preset_prop { sourcehan }
-  {
-    \__jldx_set_multiweight:nnnnnnn
-      { SourceHanSerif-Light.otf } { SourceHanSerif-Regular.otf } { SourceHanSerif-Bold.otf }
-      { SourceHanSans-Regular.otf } { SourceHanSans-Bold.otf } { SourceHanSans-Heavy.otf } { SourceHanSans-Medium.otf }
-  }
-% Source Han Sans/Serif, "Region-specific Subset OTF"
-\prop_gput:Nnn \g_jldx_preset_prop { sourcehan-jp }
-  {
-    \__jldx_set_multiweight:nnnnnnn
-      { SourceHanSerifJP-Light.otf } { SourceHanSerifJP-Regular.otf } { SourceHanSerifJP-Bold.otf }
-      { SourceHanSansJP-Regular.otf } { SourceHanSansJP-Bold.otf } { SourceHanSansJP-Heavy.otf } { SourceHanSansJP-Medium.otf }
-  }
-% Noto Sans/Serif CJK, "OpenType/CFF Collection (OTC)"
-\prop_gput:Nnn \g_jldx_preset_prop { noto-otc }
-  {
-    \__jldx_set_multiweight:nnnnnnn
-      { :0:NotoSerifCJK-Light.ttc } { :0:NotoSerifCJK-Regular.ttc } { :0:NotoSerifCJK-Bold.ttc }
-      { :0:NotoSansCJK-Regular.ttc } { :0:NotoSansCJK-Bold.ttc } { :0:NotoSansCJK-Black.ttc } { :0:NotoSansCJK-Medium.ttc }
-  }
-% Noto Sans/Serif CJK, "Language-specific OpenType/CFF (OTF)"
-\prop_gput:Nnn \g_jldx_preset_prop { noto }
-  {
-    \__jldx_set_multiweight:nnnnnnn
-      { NotoSerifCJKjp-Light.otf } { NotoSerifCJKjp-Regular.otf } { NotoSerifCJKjp-Bold.otf }
-      { NotoSansCJKjp-Regular.otf } { NotoSansCJKjp-Bold.otf } { NotoSansCJKjp-Black.otf } { NotoSansCJKjp-Medium.otf }
-  }
-% Noto Sans/Serif CJK, "Region-specific Subset OpenType/CFF (Subset OTF)"
-\prop_gput:Nnn \g_jldx_preset_prop { noto-jp }
-  {
-    \__jldx_set_multiweight:nnnnnnn
-      { NotoSerifJP-Light.otf } { NotoSerifJP-Regular.otf } { NotoSerifJP-Bold.otf }
-      { NotoSansJP-Regular.otf } { NotoSansJP-Bold.otf } { NotoSansJP-Black.otf } { NotoSansJP-Medium.otf }
-  }
-\prop_gput:Nnn \g_jldx_preset_prop { haranoaji }
-  {
-    \__jldx_set_multiweight:nnnnnnn
-      { HaranoAjiMincho-Light.otf } { HaranoAjiMincho-Regular.otf } { HaranoAjiMincho-Bold.otf }
-      { HaranoAjiGothic-Regular.otf } { HaranoAjiGothic-Bold.otf } { HaranoAjiGothic-Heavy.otf } { HaranoAjiGothic-Medium.otf }
-  }
-
-\msg_new:nnn { jlreq-deluxe } { unknown-preset }
-  {
-    Unknown~preset~``#1''.
-  }
-
-\cs_new:Npn \jldx_use_preset:n #1
-  {
-    \prop_get:NnNTF \g_jldx_preset_prop { #1 } \l_tmpa_tl
-      {
-        \tl_use:N \l_tmpa_tl
-      }
-      {
-        \msg_error:nnn { jlreq-deluxe } { unknown-preset } { #1 }
-      }
-  }
-
-\cs_generate_variant:Nn \jldx_use_preset:n { x }
-
-\tl_if_empty:NF \l_jldx_preset_tl
-  {
-    \jldx_use_preset:x { \l_jldx_preset_tl }
-  }
+% load pxjodel package
+\RequirePackage{pxjodel}

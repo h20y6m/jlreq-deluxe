@@ -45,11 +45,11 @@ tdslocations =
   }
 
 -- Load the common build code
-dofile("./build-vfcopy.lua")
 dofile("./build-config.lua")
+dofile("./build-makejvf.lua")
 
 function main(target, names)
-  target_list.vfcopy = {func = vfcopy, desc = "Copy virtual fonts"}
+  target_list.makejvf = {func = makejvf, desc = "Make japanese virtual fonts"}
   stdmain(target, names)
 end
 
