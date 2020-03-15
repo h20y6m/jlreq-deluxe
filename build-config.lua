@@ -10,9 +10,9 @@ function dvipdf(name,dir)
   return 0
 end
 
-typeset = function(file,dir)
+typeset = function(file,dir,exe)
   dir = dir or "."
-  local errorlevel = tex(file,dir)
+  local errorlevel = tex(file,dir,exe)
   if errorlevel ~= 0 then
     return errorlevel
   end
@@ -25,7 +25,7 @@ typeset = function(file,dir)
     errorlevel =
       makeindex(name,dir,".glo",".gls",".glg",glossarystyle) +
       makeindex(name,dir,".idx",".ind",".ilg",indexstyle)    +
-      tex(file,dir)
+      tex(file,dir,exe)
     if errorlevel ~= 0 then break end
   end
   if errorlevel ~= 0 then

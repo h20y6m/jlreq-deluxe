@@ -15,7 +15,7 @@ testsuppdir = maindir
 stdengine = "ptex"
 checkengines = {"ptex","uptex"}
 checkformat = "latex"
-checkopts = "-kanji=utf8 -interaction=nonstopmode"
+checkopts = " -kanji=utf8 -interaction=nonstopmode"
 
 -- Non-standard settings
 checkfiles   = { }
@@ -34,6 +34,7 @@ typesetdeps = { }
 unpackdeps  = { }
 
 typesetexe  = "platex"
+typesetopts  = " -kanji=utf8 -interaction=nonstopmode"
 
 -- Get the .tfm and .vf files in the right place
 tdslocations =
