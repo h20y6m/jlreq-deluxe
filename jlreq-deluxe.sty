@@ -11,7 +11,7 @@
 
 \NeedsTeXFormat{pLaTeX2e}
 \RequirePackage{expl3}
-\ProvidesExplPackage {jlreq-deluxe} {2020/03/15} {0.2.0}
+\ProvidesExplPackage {jlreq-deluxe} {2020/04/14} {0.3.0}
   {Multi weight font for jlreq class}
 
 % --------------------------------------------------
@@ -24,11 +24,11 @@
 
 \tl_new:N \l__jldx_prefix_tl
 \tl_new:N \l__jldx_scale_tl
+\bool_new:N \l__jldx_deluxe_bool
+\bool_new:N \l__jldx_jismmiv_bool
+\bool_new:N \l__jldx_uplatex_bool
 \bool_new:N \l__jldx_hanging_punctuation_bool
 \bool_new:N \l__jldx_zenkakunibu_nibu_bool
-\bool_new:N \l__jldx_deluxe_bool
-
-\bool_set_true:N \l__jldx_deluxe_bool
 
 % --------------------------------------------------
 % Messages
@@ -49,44 +49,28 @@
 % --------------------------------------------------
 %% Options
 
+% options for japanese-otf package
 \keys_define:nn { jlreq-deluxe }
   {
-    deluxe .bool_set:N = \l__jldx_deluxe_bool
-  }
-
-\keys_define:nn { jlreq-deluxe }
-  {
-    expert .code:n =
-      {
-        \msg_error:nnn { jlreq-deluxe } { option-not-available }
-          { expert }
-      }
-  }
-
-\keys_define:nn { jlreq-deluxe }
-  {
+    deluxe .bool_set:N = \l__jldx_deluxe_bool,
     burasage .code:n =
       {
         \msg_error:nnn { jlreq-deluxe } { option-not-available }
           { burasage }
-      }
+      },
+    jis2004 .bool_set:N = \l__jldx_jismmiv_bool,
+    uplatex .bool_set:N = \l__jldx_uplatex_bool,
+    scale .tl_set:N = \l__jldx_scale_tl,
   }
 
+% options for this package
 \keys_define:nn { jlreq-deluxe }
   {
-    scale .tl_set:N = \l__jldx_scale_tl
+    hanging_punctuation .bool_set:N = \l__jldx_hanging_punctuation_bool,
+    zenkakunibu_nibu .bool_set:N = \l__jldx_zenkakunibu_nibu_bool,
   }
 
-\keys_define:nn { jlreq-deluxe }
-  {
-    hanging_punctuation .bool_set:N = \l__jldx_hanging_punctuation_bool
-  }
-
-\keys_define:nn { jlreq-deluxe }
-  {
-    zenkakunibu_nibu .bool_set:N = \l__jldx_zenkakunibu_nibu_bool
-  }
-
+% unknown option
 \keys_define:nn { jlreq-deluxe }
   {
     unknown .code:n =
@@ -95,6 +79,14 @@
       }
   }
 
+% set default options
+\keys_set:nn { jlreq-deluxe }
+  {
+    deluxe = true,
+    jis2004 = true,
+  }
+
+% process options
 \ProcessKeysOptions { jlreq-deluxe }
 
 % --------------------------------------------------
@@ -102,15 +94,23 @@
 
 \__jldx_if_class_loaded:nT { jlreq }
   {
+    % uplatex
+    \sys_if_engine_uptex:T
+      {
+        \bool_set_true:N \l__jldx_uplatex_bool
+      }
+    % scale
     \jlreq@divide { \jlreq@jafontsize } { \jlreq@fontsize }
     \tl_set:Nx \l__jldx_scale_tl
       {
         \strip@pt \jlreq@resultdimen
       }
+    % hanging_punctuation
     \bool_set:Nn \l__jldx_zenkakunibu_nibu_bool
       {
         \str_if_eq_p:no { zenkakunibu_nibu } { \jlreq@open@bracket@pos }
       }
+    % zenkakunibu_nibu
     \bool_set:Nn \l__jldx_hanging_punctuation_bool
       {
         \legacy_if_p:n { jlreq@burasage }
@@ -136,19 +136,31 @@
 % --------------------------------------------------
 % pxjodel
 
-% jlreq jafont scale
+% prefix
 \PassOptionsToPackage { prefix = \l__jldx_prefix_tl } { pxjodel }
-
-% jlreq jafont scale
-\tl_if_empty:NF \l__jldx_scale_tl
-  {
-    \PassOptionsToPackage { scale = \l__jldx_scale_tl } { pxjodel }
-  }
 
 % deluxe
 \bool_if:NT \l__jldx_deluxe_bool
   {
     \PassOptionsToPackage { deluxe } { pxjodel }
+  }
+
+% jis2004
+\bool_if:NT \l__jldx_jismmiv_bool
+  {
+    \PassOptionsToPackage { jis2004 } { pxjodel }
+  }
+
+% uplatex
+\bool_if:NT \l__jldx_uplatex_bool
+  {
+    \PassOptionsToPackage { uplatex } { pxjodel }
+  }
+
+% scale
+\tl_if_empty:NF \l__jldx_scale_tl
+  {
+    \PassOptionsToPackage { scale = \l__jldx_scale_tl } { pxjodel }
   }
 
 % load pxjodel package

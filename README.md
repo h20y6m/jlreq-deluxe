@@ -1,7 +1,11 @@
 jlreq-deluxe パッケージ
 =======================
 
-LaTeX：八登崇之氏作成の [pxjodel](https://www.ctan.org/pkg/pxjodel) パッケージを利用し pLaTeX 及び upLaTeX で jlreq クラスを使用する場合に和文を多書体（多ウェイト）にする。
+LaTeX：pLaTeX 及び upLaTeX で [jlreq](https://www.ctan.org/pkg/jlreq) クラスを使用する場合に和文を多書体（多ウェイト）にする機能を提供する。
+
+jlreq クラスでは [JLReq](https://www.w3.org/TR/jlreq/ja/) に従った組版を実現するために独自の和文 VF を用いている。このため、多書体（多ウェイト）にしようと japanese-otf パッケージを利用すると和文 VF が置き換わってしまい、jlreq クラスの意図する組版が得られなくなってしまう。
+
+このパッケージでは jlreq クラスの提供する和文 VF を元に japanese-otf に合わせた和文 VF を提供し、さらに、[pxjodel](https://www.ctan.org/pkg/pxjodel) パッケージを利用した和文 VF 置き換え機能を提供する。
 
 ## 前提条件
 
@@ -9,26 +13,14 @@ LaTeX：八登崇之氏作成の [pxjodel](https://www.ctan.org/pkg/pxjodel) パ
 * エンジン：pTeX 及び upTeX
 * DVIウェア：和文 TFM と VF をサポートするもの。
 * 依存パッケージ
-  - [jlreq](https://www.ctan.org/pkg/jlreq) クラス
   - pxjodel パッケージ
 
 ## インストール
-
-以下のコマンドで必要なファイルを生成する。
-```
-l3build makejvf
-```
 
 各ファイルを以下のように配置する。
 * *.sty -> $TEXMF/tex/platex/jlreq-deluxe
 * *.tfm -> $TEXMF/fonts/tfm/public/jlreq-deluxe
 * *.vf -> $TEXMF/fonts/vf/public/jlreq-deluxe
-
-もしくは
-```
-l3build install
-```
-とすると `TEXMFHOME` にインストールされる。
 
 ## 使用方法
 
@@ -38,37 +30,44 @@ l3build install
 \usepackage[オプション]{jlreq-deluxe}
 ```
 
-基本的に jlreq クラスとともに使用することを想定しているが、
-他のクラスでも使用することは出来る。
+基本的に jlreq クラスとともに使用することを想定しているが、他のクラスでも使用することは出来る。
 
-\section{オプション}
+## オプション
 
 基本的に otf パッケージのと同じオプションが使用できるが、
 以下のオプションは動作が異なる。
 
 * `deluxe`
   - 既定で有効になる。
-  - 無効にしたい場合は|deluxe=false|を指定する。
-* `expert`
-  - 使用できない。
+  - 無効にしたい場合は`deluxe=false`を指定する。
 * `burasage`
   - 使用できない。
+  - ぶら下げ組みを行いたい場合は `hanging_punctuation` オプションを使用する。
+* `jis2004`
+  - 既定で有効になる。
+  - 無効にしたい場合は `jis2004=false` を指定する。
+* `uplatex`
+  - jlreq クラスを使用している場合は自動的に設定される。
 * `scale`
   - jlreq クラスを使用している場合は自動的に設定され指定は無視される。
 
 また以下のオプションが使用できる。
 
 * `hanging_punctuation`
-  - jlreq クラスの `hanging_punctuation` 指定時用のJFMを使用する。
+  - jlreq クラスの `hanging_punctuation` オプションに対応する VF を使用する。
   - jlreq クラスを使用している場合は自動的に設定され指定は無視される。
 * `zenkakunibu_nibu`
-  - jlreq クラスの `open_bracket_pos=zenkakunibu_nibu` 指定時用のJFMを使用する。
+  - jlreq クラスの `open_bracket_pos=zenkakunibu_nibu` オプションに対応する VF を使用する。
   - jlreq クラスを使用している場合は自動的に設定され指定は無視される。
 
 
 更新履歴
 -------
 
+* Version 0.3.0 <2020/04/14>
+  - 独自の和文 VF を作成
+  - JIS2004 字形をデフォルトに
+  - jlreq クラスではエンジン自動判定
 * Version 0.2.0 <2020/03/15>
   - pxjodel 使用版
 * Version 0.1.1 <2019/12/21>

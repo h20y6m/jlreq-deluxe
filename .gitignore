@@ -1,10 +1,6 @@
 ## l3build
 build/
 
-# gennarated vf/tfm
-*.vf
-*.tfm
-
 
 ## Core latex/pdflatex auxiliary files:
 *.aux
@@ -85,7 +81,6 @@ acs-*.bib
 *.mp
 *.t[1-9]
 *.t[1-9][0-9]
-*.tfm
 
 #(r)(e)ledmac/(r)(e)ledpar
 *.end

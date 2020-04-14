@@ -1,41 +1,45 @@
-\documentclass[dvipdfmx,a4paper,jis2004]{jlreq}
-
+\documentclass[dvipdfmx,a4paper]{jlreq}
 \usepackage[T1]{fontenc}
 \usepackage{lmodern}
-
 \usepackage{jlreq-deluxe}
 \usepackage[haranoaji]{pxchfon}
-% 原ノ味フォント / Harano Aji Fonts (https://github.com/trueroad/HaranoAjiFonts)
-
+\usepackage[colorlinks,implicit=false]{hyperref}
+\usepackage{pxjahyper}
 \usepackage{bxghost}
-
+\usepackage{bxtexlogo}
+\bxtexlogoimport{*}
 \usepackage{shortvrb}
 \MakeShortVerb{\|}
-
 \newcommand{\pkg}[1]{\textsf{#1}}
 \newcommand{\cls}[1]{\textsf{#1}}
 \newcommand{\cmd}[1]{\eghostguarded{\texttt{\symbol{92}#1}}}
 \newcommand{\meta}[1]{$\langle$\nobreak\hspace{0pt}#1\nobreak\hspace{0pt}$\rangle$}
 
-\newcommand{\pTeX}{p\TeX}
-\newcommand{\pLaTeX}{p\LaTeX}
-\newcommand{\upTeX}{u\pTeX}
-\newcommand{\upLaTeX}{u\pLaTeX}
-
 
 \title{\pkg{jlreq-deluxe}パッケージ}
 \author{h20y6m}
-\date{2020/03/15}
+\date{2020/04/14}
 
 \begin{document}
 
 \maketitle
 
+
 \section{概要}
 
-八登崇之氏作成の\pkg{pxjodel}パッケージ\footnote{\texttt{https://www.ctan.org/pkg/pxjodel}}%
-を利用し\pLaTeX および\upLaTeX 上の\cls{jlreq}クラスにおいて和文を多書体（多ウェイト）にする
-機能を提供する。
+\pLaTeX 及び\upLaTeX で\cls{jlreq}クラス\footnote{\url{https://www.ctan.org/pkg/jlreq}}%
+を使用する場合に和文を多書体（多ウェイト）にする機能を提供する。
+
+\cls{jlreq}クラスではJLReq\footnote{W3C「日本語組版処理の要件」（\url{https://www.w3.org/TR/jlreq/ja/}）}に従った
+組版を実現するために独自の和文VFを用いている。
+このため、多書体（多ウェイト）にしようと\pkg{japanese-otf}パッケージ
+\footnote{\url{https://www.ctan.org/pkg/japanese-otf}}を利用すると
+和文VFが置き換わってしまい、\pkg{jlreq}クラスの意図する組版が得られなくなってしまう。
+
+このパッケージでは\cls{jlreq}クラスの提供する和文VFを元に\pkg{japanese-otf}に合わせた
+和文VFを提供し、さらに、\pkg{pxjodel}パッケージ
+\footnote{\url{https://www.ctan.org/pkg/pxjodel}}を利用した和文VF置き換え機能を提供する。
+
 
 \section{前提条件}
 
@@ -45,10 +49,10 @@
 \item DVIウェア：和文TFMとVFをサポートするもの。
 \item 前提パッケージ：
   \begin{itemize}
-  \item \cls{jlreq}クラス
   \item \pkg{pxjodel}パッケージ
   \end{itemize}
 \end{itemize}
+
 
 \section{使用方法}
 
@@ -63,6 +67,7 @@
 基本的に\cls{jlreq}クラスとともに使用することを想定しているが、
 他のクラスでも使用することは出来る。
 
+
 \section{オプション}
 
 基本的に\pkg{otf}パッケージのと同じオプションが使用できるが、
@@ -72,10 +77,14 @@
 \item |deluxe|\\
   既定で有効になる。
   無効にしたい場合は|deluxe=false|を指定する。
-\item |expert|\\
-  使用できない。
 \item |burasage|\\
   使用できない。
+  ぶら下げ組みを行いたい場合は|hanging_punctuation|オプションを使用する。
+\item |jis2004|\\
+  既定で有効になる。
+  無効にしたい場合は|jis2004=false|を指定する。
+\item |uplatex|\\
+  \cls{jlreq}クラスを使用している場合は自動的に設定される。
 \item |scale|\\
   \cls{jlreq}クラスを使用している場合は自動的に設定され指定は無視される。
 \end{itemize}
@@ -84,11 +93,12 @@
 
 \begin{itemize}
 \item |hanging_punctuation|\\
-  \cls{jlreq}クラスの|hanging_punctuation|指定時用のJFMを使用する。
+  \cls{jlreq}クラスの|hanging_punctuation|オプションに対応するVFを使用する。
   \cls{jlreq}クラスを使用している場合は自動的に設定され指定は無視される。
 \item |zenkakunibu_nibu|\\
-  \cls{jlreq}クラスの|open_bracket_pos=zenkakunibu_nibu|指定時用のJFMを使用する。
+  \cls{jlreq}クラスの|open_bracket_pos=zenkakunibu_nibu|オプションに対応するVFを使用する。
   \cls{jlreq}クラスを使用している場合は自動的に設定され指定は無視される。
 \end{itemize}
+
 
 \end{document}

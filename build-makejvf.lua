@@ -1,31 +1,82 @@
+local elu = require("build-elu.lua")
 
-local function jfmutil_jodel(in_vf,prefix)
-  print(">jfmutil jodel " .. in_vf .. " " .. prefix)
+makejvfdir = makejvfdir or "./build/makejvf"
+zvpfiledir = zvpfiledir or "./zvp"
+vffiledir  = vffiledir  or "./vf"
+tfmfiledir = tfmfiledir or "./tfm"
+
+local jlreq_prefix_list = {
+  "jlreq",
+  "bjlreq",
+  "zjlreq",
+  "bzjlreq",
+}
+local font_series_list = {
+  {"minl","ml"},
+  {"minr","mr"},
+  {"minb","mb"},
+  {"gothr","gr"},
+  {"gothb","gb"},
+  {"gotheb","ge"},
+  {"mgothr","mgr"},
+}
+
+local function jfmutil_zvp2vf(dir,in_zvp)
+  dir = dir or "."
+  -- print("> jfmutil zvp2vf " .. in_zvp)
   run(
-    ".",
-    "jfmutil jodel " .. in_vf .. " " .. prefix
+    dir,
+    "jfmutil zvp2vf " .. in_zvp
   )
 end
 
-local function jfmutil_jodel_jlreq()
-  local jlreq_prefix_list = {"","b","z","bz"}
+local function generate_zvp(srcpath,dstpath,table)
+  local src = assert(io.open(srcpath, "r"))
+  local data = src:read("*all")
+  src:close()
+  local e = elu.new(data)
+  local dst = assert(io.open(dstpath, "w"))
+  dst:write(elu.result(e, table))
+  assert(dst:close())
+end
+
+local function make_vf_all(srcdir,dstdir)
   for _,p in pairs(jlreq_prefix_list) do
-    -- for pTeX yoko
-    -- jfmutil jodel [b][z]jlreq [b][z]jlreq
-    jfmutil_jodel(p .. "jlreq", p .. "jlreq")
-    -- for pTeX tate
-    -- jfmutil jodel [b][z]jlreq [b][z]jlreq
-    jfmutil_jodel(p .. "jlreq-v", p .. "jlreq")
-    -- for upTeX yoko
-    -- jfmutil jodel u[b][z]jlreq u[b][z]jlreq
-    jfmutil_jodel("u" .. p .. "jlreq", p .. "jlreq")
-    -- for upTeX tate
-    -- jfmutil jodel u[b][z]jlreq-v u[b][z]jlreq
-    jfmutil_jodel("u" .. p .. "jlreq-v", p .. "jlreq")
+    for _,s in pairs(font_series_list) do
+      for _,u in ipairs({ "", "up" }) do
+        for _,e in ipairs({ "nml", "exp" }) do
+          for _,n in ipairs({ "", "n" }) do
+            for _,v in ipairs({"-h","-v"}) do
+              local eluname = p .. "--" .. u .. "template" .. v
+              local zvpname = p .. "--" .. u .. e .. s[1] .. n .. v
+              local elufile = eluname .. ".zvp.elu"
+              local zvpfile = zvpname .. ".zvp"
+              local elupath = srcdir .. "/" .. elufile
+              local zvppath = dstdir .. "/" .. zvpfile
+              local t = {}
+              t.shape = s[1]
+              t.cid_shape = s[2]
+              t.is_expert = e == "exp"
+              t.is_jis2004 = n == "n"
+              t.jis2004_n = n
+              print("Genarating "..zvpname.." ...")
+              generate_zvp(elupath,zvppath,t)
+              jfmutil_zvp2vf(dstdir,zvpfile)
+            end
+          end
+        end
+      end
+    end
   end
-  return 0
 end
 
 function makejvf()
-  jfmutil_jodel_jlreq()
+  cleandir(makejvfdir)
+  make_vf_all(zvpfiledir,makejvfdir)
+  vfname  = "*.vf"
+  tfmname = "*.tfm"
+  rm(vffiledir,vfname)
+  rm(tfmfiledir,tfmname)
+  cp(vfname,makejvfdir,vffiledir)
+  cp(tfmname,makejvfdir,tfmfiledir)
 end

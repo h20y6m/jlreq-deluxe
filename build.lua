@@ -19,10 +19,10 @@ checkopts = " -kanji=utf8 -interaction=nonstopmode"
 
 -- Non-standard settings
 checkfiles   = { }
-cleanfiles   = {"*.tfm", "*.vf", "*.log", "*.pdf", "*.zip"}
+cleanfiles   = {"tfm/*.tfm", "vf/*.vf", "*.log", "*.pdf", "*.zip"}
 docfiles     = {"jlreq-deluxe.tex"}
 installfiles = {"*.tfm", "*.vf", "*.sty"}
-sourcefiles  = {"*.tfm", "*.vf", "*.sty"}
+sourcefiles  = {"tfm/*.tfm", "vf/*.vf", "*.sty"}
 tagfiles     = {"jlreq-deluxe.sty"}
 typesetfiles = {"jlreq-deluxe.tex"}
 typesetskipfiles = { }
