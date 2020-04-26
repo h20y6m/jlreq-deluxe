@@ -1,0 +1,3 @@
+% Device-independent font metric files.
+VFFONTS = $TEXMFDOTDIR;../../vf/;$TEXMF/fonts/vf//
+TFMFONTS = $TEXMFDOTDIR;../../tfm/;{$TEXMF/fonts,$VARTEXFONTS}/tfm//

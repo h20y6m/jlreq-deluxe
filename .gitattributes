@@ -1,0 +1,4 @@
+*               text=auto
+*.pdf           binary
+*.tfm           binary
+*.vf            binary

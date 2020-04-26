@@ -8,48 +8,59 @@ bundle = ""
 
 -- Location of main directory: use Unix-style path separators
 maindir = "."
-docfiledir = maindir
-testsuppdir = maindir
+
+-- Root directory of the TDS structure for the bundle/moduleto be installed into
+tdsroot = "platex"
+
+-- Files
+binaryfiles      = {"*.pdf", "*.tfm", "*.vf", "*.zip"}
+checksuppfiles   = {"texmf.cnf"}
+cleanfiles       = {"*.log", "*.pdf", "*.zip"}
+installfiles     = {"*.sty"}
+sourcefiles      = {"*.sty"}
+tagfiles         = {"*.sty"}
+typesetfiles     = {"*.tex"}
+typesetsuppfiles = {"texmf.cnf"}
 
 -- Check engines
-stdengine = "ptex"
 checkengines = {"ptex","uptex"}
-checkformat = "latex"
-checkopts = " -kanji=utf8 -interaction=nonstopmode"
+stdengine    = "ptex"
+checkformat  = "latex"
 
--- Non-standard settings
-checkfiles   = { }
-cleanfiles   = {"tfm/*.tfm", "vf/*.vf", "*.log", "*.pdf", "*.zip"}
-docfiles     = {"jlreq-deluxe.tex"}
-installfiles = {"*.tfm", "*.vf", "*.sty"}
-sourcefiles  = {"tfm/*.tfm", "vf/*.vf", "*.sty"}
-tagfiles     = {"jlreq-deluxe.sty"}
-typesetfiles = {"jlreq-deluxe.tex"}
-typesetskipfiles = { }
-typesetruns      = 3
-unpackfiles      = { }
+-- Executable
+typesetexe = "platex"
 
-checkdeps   = { }
-typesetdeps = { }
-unpackdeps  = { }
+-- Options pass to engine
+checkopts   = " -kanji=utf8 -interaction=nonstopmode"
+typesetopts = " -kanji=utf8 -interaction=nonstopmode"
 
-typesetexe  = "platex"
-typesetopts  = " -kanji=utf8 -interaction=nonstopmode"
+checkruns   = 1
+typesetruns = 3
 
 -- Get the .tfm and .vf files in the right place
 tdslocations =
   {
-    "fonts/tfm/public/jlreq-deluxe/*.tfm",
-    "fonts/vf/public/jlreq-deluxe/*.vf",
-    "tex/platex/jlreq-deluxe/*.sty",
+    "fonts/tfm/public/"..module.."/*.tfm",
+    "fonts/vf/public/"..module.."/*.vf",
   }
 
 -- Load the common build code
 dofile("./build-config.lua")
 dofile("./build-makejvf.lua")
 
+
+-- Custom main function
 function main(target, names)
+  -- Add custom build target
   target_list.makejvf = {func = makejvf, desc = "Make japanese virtual fonts"}
+
+  -- Customize build functions
+  dvitopdf      = customize_dvitopdf(dvitopdf)
+  typeset       = customize_typeset(typeset)
+  install_files = customize_install_files(install_files)
+  copyctan      = customize_copyctan(copyctan)
+
+  -- Call standard main function
   stdmain(target, names)
 end
 
