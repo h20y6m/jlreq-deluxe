@@ -1,7 +1,7 @@
 %%
 %% jlreq-deluxe.sty
 %%
-%% Copyright 2019-2020 h20y6m
+%% Copyright 2019-2020 Yukimasa Morimi (h20y6m)
 %%   GitHub:   https://github.com/h20y6m
 %%
 %% This package is distributed under the MIT License.
@@ -10,9 +10,9 @@
 % --------------------------------------------------
 
 \NeedsTeXFormat{pLaTeX2e}
-\RequirePackage{expl3}
-\ProvidesExplPackage {jlreq-deluxe} {2020/04/14} {0.3.0}
-  {Multi weight font for jlreq class}
+\RequirePackage{expl3}[2019-05-03]
+\ProvidesExplPackage {jlreq-deluxe} {2020-04-26} {0.3.1}
+  {Multi-weight Japanese font for jlreq class}
 
 % --------------------------------------------------
 % load packeges
@@ -39,7 +39,7 @@
 % --------------------------------------------------
 % Helpers
 
-\prg_set_conditional:Npnn \__jldx_if_class_loaded:n #1 { p , T , F , TF }
+\prg_new_conditional:Npnn \__jldx_if_class_loaded:n #1 { p , T , F , TF }
   {
     \@ifclassloaded {#1}
       { \prg_return_true: }
