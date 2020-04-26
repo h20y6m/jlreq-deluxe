@@ -1,0 +1,380 @@
+This is a generated file for the l3build validation system.
+Don't change this file in any respect.
+============================================================
+TEST 1: minl
+============================================================
+> \box...=
+\hbox(8.79999+1.2)x208.33333, yoko direction
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\glue(refer from jfm) 5.0 minus 5.0
+.\displace 0.0
+.\JY2/hmc/l/n/10 「
+.\penalty 10000(for kinsoku)
+.\glue(refer from jfm) 0.0
+.\JY2/hmc/l/n/10 テ
+.\JY2/hmc/l/n/10 ス
+.\JY2/hmc/l/n/10 ト
+.\penalty 10000(for kinsoku)
+.\glue(refer from jfm) 0.0
+.\JY2/hmc/l/n/10 。
+.\penalty 10000(for kinsoku)
+.\glue(refer from jfm) 5.0
+.\JY2/hmc/l/n/10 」
+.\glue(refer from jfm) 5.0 minus 5.0
+.\JY2/hmc/l/n/10 テ
+.\JY2/hmc/l/n/10 ス
+.\JY2/hmc/l/n/10 ト
+.\penalty 10000(for kinsoku)
+.\glue(refer from jfm) 0.0
+.\JY2/hmc/l/n/10 、
+.\glue(refer from jfm) 10.0 minus 5.0
+.\JY2/hmc/l/n/10 テ
+.\JY2/hmc/l/n/10 ス
+.\JY2/hmc/l/n/10 ト
+.\glue(refer from jfm) 5.0 minus 5.0
+.\JY2/hmc/l/n/10 「
+.\penalty 10000(for kinsoku)
+.\glue(refer from jfm) 0.0
+.\JY2/hmc/l/n/10 テ
+.\JY2/hmc/l/n/10 ス
+.\JY2/hmc/l/n/10 ト
+.\penalty 10000(for kinsoku)
+.\glue(refer from jfm) 0.0
+.\JY2/hmc/l/n/10 」
+.\glue(refer from jfm) 5.0 minus 5.0
+.\JY2/hmc/l/n/10 テ
+.\JY2/hmc/l/n/10 ス
+.\JY2/hmc/l/n/10 ト
+.\penalty 10000(for kinsoku)
+.\glue(refer from jfm) 0.0
+.\JY2/hmc/l/n/10 。
+.\glue(refer from jfm) 0.0
+! OK.
+<to be read again> 
+                   \endgroup 
+l. ...\test{minl}{\mcfamily\ltseries}
+============================================================
+============================================================
+TEST 2: minr
+============================================================
+> \box...=
+\hbox(8.79999+1.2)x208.33333, yoko direction
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\glue(refer from jfm) 5.0 minus 5.0
+.\displace 0.0
+.\JY2/hmc/m/n/10 「
+.\penalty 10000(for kinsoku)
+.\glue(refer from jfm) 0.0
+.\JY2/hmc/m/n/10 テ
+.\JY2/hmc/m/n/10 ス
+.\JY2/hmc/m/n/10 ト
+.\penalty 10000(for kinsoku)
+.\glue(refer from jfm) 0.0
+.\JY2/hmc/m/n/10 。
+.\penalty 10000(for kinsoku)
+.\glue(refer from jfm) 5.0
+.\JY2/hmc/m/n/10 」
+.\glue(refer from jfm) 5.0 minus 5.0
+.\JY2/hmc/m/n/10 テ
+.\JY2/hmc/m/n/10 ス
+.\JY2/hmc/m/n/10 ト
+.\penalty 10000(for kinsoku)
+.\glue(refer from jfm) 0.0
+.\JY2/hmc/m/n/10 、
+.\glue(refer from jfm) 10.0 minus 5.0
+.\JY2/hmc/m/n/10 テ
+.\JY2/hmc/m/n/10 ス
+.\JY2/hmc/m/n/10 ト
+.\glue(refer from jfm) 5.0 minus 5.0
+.\JY2/hmc/m/n/10 「
+.\penalty 10000(for kinsoku)
+.\glue(refer from jfm) 0.0
+.\JY2/hmc/m/n/10 テ
+.\JY2/hmc/m/n/10 ス
+.\JY2/hmc/m/n/10 ト
+.\penalty 10000(for kinsoku)
+.\glue(refer from jfm) 0.0
+.\JY2/hmc/m/n/10 」
+.\glue(refer from jfm) 5.0 minus 5.0
+.\JY2/hmc/m/n/10 テ
+.\JY2/hmc/m/n/10 ス
+.\JY2/hmc/m/n/10 ト
+.\penalty 10000(for kinsoku)
+.\glue(refer from jfm) 0.0
+.\JY2/hmc/m/n/10 。
+.\glue(refer from jfm) 0.0
+! OK.
+<to be read again> 
+                   \endgroup 
+l. ...\test{minr}{\mcfamily\mdseries}
+============================================================
+============================================================
+TEST 3: minb
+============================================================
+> \box...=
+\hbox(8.79999+1.2)x208.83333, yoko direction
+.\glue 3.83333 plus 1.91667 minus 1.27777
+.\glue(refer from jfm) 5.0 minus 5.0
+.\displace 0.0
+.\JY2/hmc/bx/n/10 「
+.\penalty 10000(for kinsoku)
+.\glue(refer from jfm) 0.0
+.\JY2/hmc/bx/n/10 テ
+.\JY2/hmc/bx/n/10 ス
+.\JY2/hmc/bx/n/10 ト
+.\penalty 10000(for kinsoku)
+.\glue(refer from jfm) 0.0
+.\JY2/hmc/bx/n/10 。
+.\penalty 10000(for kinsoku)
+.\glue(refer from jfm) 5.0
+.\JY2/hmc/bx/n/10 」
+.\glue(refer from jfm) 5.0 minus 5.0
+.\JY2/hmc/bx/n/10 テ
+.\JY2/hmc/bx/n/10 ス
+.\JY2/hmc/bx/n/10 ト
+.\penalty 10000(for kinsoku)
+.\glue(refer from jfm) 0.0
+.\JY2/hmc/bx/n/10 、
+.\glue(refer from jfm) 10.0 minus 5.0
+.\JY2/hmc/bx/n/10 テ
+.\JY2/hmc/bx/n/10 ス
+.\JY2/hmc/bx/n/10 ト
+.\glue(refer from jfm) 5.0 minus 5.0
+.\JY2/hmc/bx/n/10 「
+.\penalty 10000(for kinsoku)
+.\glue(refer from jfm) 0.0
+.\JY2/hmc/bx/n/10 テ
+.\JY2/hmc/bx/n/10 ス
+.\JY2/hmc/bx/n/10 ト
+.\penalty 10000(for kinsoku)
+.\glue(refer from jfm) 0.0
+.\JY2/hmc/bx/n/10 」
+.\glue(refer from jfm) 5.0 minus 5.0
+.\JY2/hmc/bx/n/10 テ
+.\JY2/hmc/bx/n/10 ス
+.\JY2/hmc/bx/n/10 ト
+.\penalty 10000(for kinsoku)
+.\glue(refer from jfm) 0.0
+.\JY2/hmc/bx/n/10 。
+.\glue(refer from jfm) 0.0
+! OK.
+<to be read again> 
+                   \endgroup 
+l. ...\test{minb}{\mcfamily\bfseries}
+============================================================
+============================================================
+TEST 4: gothr
+============================================================
+> \box...=
+\hbox(8.79999+1.2)x208.33333, yoko direction
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\glue(refer from jfm) 5.0 minus 5.0
+.\displace 0.0
+.\JY2/hgt/m/n/10 「
+.\penalty 10000(for kinsoku)
+.\glue(refer from jfm) 0.0
+.\JY2/hgt/m/n/10 テ
+.\JY2/hgt/m/n/10 ス
+.\JY2/hgt/m/n/10 ト
+.\penalty 10000(for kinsoku)
+.\glue(refer from jfm) 0.0
+.\JY2/hgt/m/n/10 。
+.\penalty 10000(for kinsoku)
+.\glue(refer from jfm) 5.0
+.\JY2/hgt/m/n/10 」
+.\glue(refer from jfm) 5.0 minus 5.0
+.\JY2/hgt/m/n/10 テ
+.\JY2/hgt/m/n/10 ス
+.\JY2/hgt/m/n/10 ト
+.\penalty 10000(for kinsoku)
+.\glue(refer from jfm) 0.0
+.\JY2/hgt/m/n/10 、
+.\glue(refer from jfm) 10.0 minus 5.0
+.\JY2/hgt/m/n/10 テ
+.\JY2/hgt/m/n/10 ス
+.\JY2/hgt/m/n/10 ト
+.\glue(refer from jfm) 5.0 minus 5.0
+.\JY2/hgt/m/n/10 「
+.\penalty 10000(for kinsoku)
+.\glue(refer from jfm) 0.0
+.\JY2/hgt/m/n/10 テ
+.\JY2/hgt/m/n/10 ス
+.\JY2/hgt/m/n/10 ト
+.\penalty 10000(for kinsoku)
+.\glue(refer from jfm) 0.0
+.\JY2/hgt/m/n/10 」
+.\glue(refer from jfm) 5.0 minus 5.0
+.\JY2/hgt/m/n/10 テ
+.\JY2/hgt/m/n/10 ス
+.\JY2/hgt/m/n/10 ト
+.\penalty 10000(for kinsoku)
+.\glue(refer from jfm) 0.0
+.\JY2/hgt/m/n/10 。
+.\glue(refer from jfm) 0.0
+! OK.
+<to be read again> 
+                   \endgroup 
+l. ...\test{gothr}{\gtfamily\mdseries}
+============================================================
+============================================================
+TEST 5: gothb
+============================================================
+> \box...=
+\hbox(8.79999+1.2)x208.83333, yoko direction
+.\glue 3.83333 plus 1.91667 minus 1.27777
+.\glue(refer from jfm) 5.0 minus 5.0
+.\displace 0.0
+.\JY2/hgt/bx/n/10 「
+.\penalty 10000(for kinsoku)
+.\glue(refer from jfm) 0.0
+.\JY2/hgt/bx/n/10 テ
+.\JY2/hgt/bx/n/10 ス
+.\JY2/hgt/bx/n/10 ト
+.\penalty 10000(for kinsoku)
+.\glue(refer from jfm) 0.0
+.\JY2/hgt/bx/n/10 。
+.\penalty 10000(for kinsoku)
+.\glue(refer from jfm) 5.0
+.\JY2/hgt/bx/n/10 」
+.\glue(refer from jfm) 5.0 minus 5.0
+.\JY2/hgt/bx/n/10 テ
+.\JY2/hgt/bx/n/10 ス
+.\JY2/hgt/bx/n/10 ト
+.\penalty 10000(for kinsoku)
+.\glue(refer from jfm) 0.0
+.\JY2/hgt/bx/n/10 、
+.\glue(refer from jfm) 10.0 minus 5.0
+.\JY2/hgt/bx/n/10 テ
+.\JY2/hgt/bx/n/10 ス
+.\JY2/hgt/bx/n/10 ト
+.\glue(refer from jfm) 5.0 minus 5.0
+.\JY2/hgt/bx/n/10 「
+.\penalty 10000(for kinsoku)
+.\glue(refer from jfm) 0.0
+.\JY2/hgt/bx/n/10 テ
+.\JY2/hgt/bx/n/10 ス
+.\JY2/hgt/bx/n/10 ト
+.\penalty 10000(for kinsoku)
+.\glue(refer from jfm) 0.0
+.\JY2/hgt/bx/n/10 」
+.\glue(refer from jfm) 5.0 minus 5.0
+.\JY2/hgt/bx/n/10 テ
+.\JY2/hgt/bx/n/10 ス
+.\JY2/hgt/bx/n/10 ト
+.\penalty 10000(for kinsoku)
+.\glue(refer from jfm) 0.0
+.\JY2/hgt/bx/n/10 。
+.\glue(refer from jfm) 0.0
+! OK.
+<to be read again> 
+                   \endgroup 
+l. ...\test{gothb}{\gtfamily\bfseries}
+============================================================
+============================================================
+TEST 6: gotheb
+============================================================
+> \box...=
+\hbox(8.79999+1.2)x208.33333, yoko direction
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\glue(refer from jfm) 5.0 minus 5.0
+.\displace 0.0
+.\JY2/hgt/eb/n/10 「
+.\penalty 10000(for kinsoku)
+.\glue(refer from jfm) 0.0
+.\JY2/hgt/eb/n/10 テ
+.\JY2/hgt/eb/n/10 ス
+.\JY2/hgt/eb/n/10 ト
+.\penalty 10000(for kinsoku)
+.\glue(refer from jfm) 0.0
+.\JY2/hgt/eb/n/10 。
+.\penalty 10000(for kinsoku)
+.\glue(refer from jfm) 5.0
+.\JY2/hgt/eb/n/10 」
+.\glue(refer from jfm) 5.0 minus 5.0
+.\JY2/hgt/eb/n/10 テ
+.\JY2/hgt/eb/n/10 ス
+.\JY2/hgt/eb/n/10 ト
+.\penalty 10000(for kinsoku)
+.\glue(refer from jfm) 0.0
+.\JY2/hgt/eb/n/10 、
+.\glue(refer from jfm) 10.0 minus 5.0
+.\JY2/hgt/eb/n/10 テ
+.\JY2/hgt/eb/n/10 ス
+.\JY2/hgt/eb/n/10 ト
+.\glue(refer from jfm) 5.0 minus 5.0
+.\JY2/hgt/eb/n/10 「
+.\penalty 10000(for kinsoku)
+.\glue(refer from jfm) 0.0
+.\JY2/hgt/eb/n/10 テ
+.\JY2/hgt/eb/n/10 ス
+.\JY2/hgt/eb/n/10 ト
+.\penalty 10000(for kinsoku)
+.\glue(refer from jfm) 0.0
+.\JY2/hgt/eb/n/10 」
+.\glue(refer from jfm) 5.0 minus 5.0
+.\JY2/hgt/eb/n/10 テ
+.\JY2/hgt/eb/n/10 ス
+.\JY2/hgt/eb/n/10 ト
+.\penalty 10000(for kinsoku)
+.\glue(refer from jfm) 0.0
+.\JY2/hgt/eb/n/10 。
+.\glue(refer from jfm) 0.0
+! OK.
+<to be read again> 
+                   \endgroup 
+l. ...\test{gotheb}{\gtfamily\ebseries}
+============================================================
+============================================================
+TEST 7: mgothr
+============================================================
+> \box...=
+\hbox(8.79999+1.2)x208.33333, yoko direction
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\glue(refer from jfm) 5.0 minus 5.0
+.\displace 0.0
+.\JY2/mg/m/n/10 「
+.\penalty 10000(for kinsoku)
+.\glue(refer from jfm) 0.0
+.\JY2/mg/m/n/10 テ
+.\JY2/mg/m/n/10 ス
+.\JY2/mg/m/n/10 ト
+.\penalty 10000(for kinsoku)
+.\glue(refer from jfm) 0.0
+.\JY2/mg/m/n/10 。
+.\penalty 10000(for kinsoku)
+.\glue(refer from jfm) 5.0
+.\JY2/mg/m/n/10 」
+.\glue(refer from jfm) 5.0 minus 5.0
+.\JY2/mg/m/n/10 テ
+.\JY2/mg/m/n/10 ス
+.\JY2/mg/m/n/10 ト
+.\penalty 10000(for kinsoku)
+.\glue(refer from jfm) 0.0
+.\JY2/mg/m/n/10 、
+.\glue(refer from jfm) 10.0 minus 5.0
+.\JY2/mg/m/n/10 テ
+.\JY2/mg/m/n/10 ス
+.\JY2/mg/m/n/10 ト
+.\glue(refer from jfm) 5.0 minus 5.0
+.\JY2/mg/m/n/10 「
+.\penalty 10000(for kinsoku)
+.\glue(refer from jfm) 0.0
+.\JY2/mg/m/n/10 テ
+.\JY2/mg/m/n/10 ス
+.\JY2/mg/m/n/10 ト
+.\penalty 10000(for kinsoku)
+.\glue(refer from jfm) 0.0
+.\JY2/mg/m/n/10 」
+.\glue(refer from jfm) 5.0 minus 5.0
+.\JY2/mg/m/n/10 テ
+.\JY2/mg/m/n/10 ス
+.\JY2/mg/m/n/10 ト
+.\penalty 10000(for kinsoku)
+.\glue(refer from jfm) 0.0
+.\JY2/mg/m/n/10 。
+.\glue(refer from jfm) 0.0
+! OK.
+<to be read again> 
+                   \endgroup 
+l. ...\test{mgothr}{\mgfamily\mdseries}
+============================================================
