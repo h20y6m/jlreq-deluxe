@@ -3,7 +3,7 @@ jlreq-deluxe パッケージ
 
 LaTeX：pLaTeX 及び upLaTeX で [jlreq](https://www.ctan.org/pkg/jlreq) クラスを使用する場合に和文を多書体（多ウェイト）にする機能を提供する。
 
-jlreq クラスでは [JLReq](https://www.w3.org/TR/jlreq/ja/) に従った組版を実現するために独自の和文 VF を用いている。このため、多書体（多ウェイト）にしようと [japanese-otf](https://www.ctan.org/pkg/japanese-otf) パッケージを利用すると和文 VF が置き換わってしまい、jlreq クラスの意図する組版が得られなくなってしまう。
+jlreq クラスでは [JLReq](https://www.w3.org/TR/jlreq/?lang=ja) に従った組版を実現するために独自の和文 VF を用いている。このため、多書体（多ウェイト）にしようと [japanese-otf](https://www.ctan.org/pkg/japanese-otf) パッケージを利用すると和文 VF が置き換わってしまい、jlreq クラスの意図する組版が得られなくなってしまう。
 
 このパッケージでは jlreq クラスの提供する和文 VF を元に japanese-otf に合わせた和文 VF を提供し、さらに、[pxjodel](https://www.ctan.org/pkg/pxjodel) パッケージを利用した和文 VF 置き換え機能を提供する。
 
