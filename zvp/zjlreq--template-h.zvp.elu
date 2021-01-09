@@ -451,6 +451,12 @@
       (SETCHAR H 6F62)
       )
    )
+(CHARACTER H 213C
+   (MAP
+      (SELECTFONT D 3)
+      (SETCHAR H 313C)
+      )
+   )
 (CHARACTER H 2421
    (MAP
       (SELECTFONT D 2)
