@@ -68,6 +68,8 @@ jlreq クラスでは [JLReq](https://www.w3.org/TR/jlreq/?lang=ja) に従った
 更新履歴
 -------
 
+* Version 0.3.2 <2021/01/09>
+  - `exp*-h.vf` の JIS 0x213C から CID+12364 への引き当てが抜けていたのを修正
 * Version 0.3.1 <2020/04/26>
   - ビルドスクリプトの改良
   - テストを追加

@@ -29,6 +29,8 @@ This package is distributed under [the MIT License](LICENSE).
 History
 -------
 
+* Version 0.3.2 <2021/01/09>
+  - Fix missing map JIS 0x213C to CID+12364 in exp*-h.vf.
 * Version 0.3.1 <2020/04/26>
   - Improve build script.
   - Add test.

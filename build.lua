@@ -19,6 +19,7 @@ cleanfiles       = {"*.log", "*.pdf", "*.zip"}
 installfiles     = {"*.sty"}
 sourcefiles      = {"*.sty"}
 tagfiles         = {"*.sty"}
+textfiles        = {"*.md", "LICENSE"}
 typesetfiles     = {"*.tex"}
 typesetsuppfiles = {"texmf.cnf"}
 
