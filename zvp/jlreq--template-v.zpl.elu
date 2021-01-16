@@ -1,0 +1,463 @@
+(DIRECTION TATE)
+(FAMILY UNSPECIFIED)
+(FACE F MRR)
+(CODINGSCHEME TEX KANJI TEXT)
+(DESIGNSIZE R 10.0)
+<% if is_burasage then %>
+<%  if is_zenkakunibu then %>
+(CHECKSUM O 37676042272)
+<%  else -- is_zenkakunibu %>
+(CHECKSUM O 17624302360)
+<%  end -- is_zenkakunibu %>
+<% else -- is_burasage %>
+<%  if is_zenkakunibu then %>
+(CHECKSUM O 1320437052)
+<%  else -- is_zenkakunibu %>
+(CHECKSUM O 21246077140)
+<%  end -- is_zenkakunibu %>
+<% end -- is_burasage %>
+(FONTDIMEN
+   (SLANT R 0.0)
+   (SPACE R 0.0)
+   (STRETCH R 0.25)
+   (SHRINK R 0.0)
+   (XHEIGHT R 1.0)
+   (QUAD R 1.0)
+   (EXTRASPACE R 0.25)
+   (EXTRASTRETCH R 0.25)
+   (EXTRASHRINK R 0.125)
+   )
+(GLUEKERN
+   (LABEL D 0)
+<% if is_zenkakunibu then %>
+   (GLUE D 1 R 0.0 R 0.0 R 0.5)
+<% else -- is_zenkakunibu %>
+   (GLUE D 1 R 0.5 R 0.0 R 0.5)
+<% end -- is_zenkakunibu %>
+   (GLUE D 2 R 0.0 R 0.0 R 0.0)
+   (GLUE D 3 R 0.0 R 0.0 R 0.0)
+   (GLUE D 4 R 0.25 R 0.0 R 0.25)
+   (GLUE D 5 R 0.0 R 0.0 R 0.0)
+   (GLUE D 6 R 0.0 R 0.0 R 0.0)
+   (GLUE D 10 R 0.0 R 0.0 R 0.0)
+   (GLUE D 12 R 0.0 R 0.0 R 0.0)
+   (GLUE D 13 R 0.0 R 0.0 R 0.0)
+   (STOP)
+   (LABEL D 1)
+   (GLUE D 0 R 0.0 R 0.0 R 0.0)
+<% if is_zenkakunibu then %>
+   (GLUE D 1 R -0.5 R 0.0 R 0.0)
+<% else -- is_zenkakunibu %>
+   (GLUE D 1 R 0.0 R 0.0 R 0.0)
+<% end -- is_zenkakunibu %>
+   (GLUE D 2 R 0.0 R 0.0 R 0.0)
+   (GLUE D 3 R 0.0 R 0.0 R 0.0)
+   (GLUE D 4 R 0.25 R 0.0 R 0.25)
+   (GLUE D 5 R 0.0 R 0.0 R 0.0)
+   (GLUE D 6 R 0.0 R 0.0 R 0.0)
+   (GLUE D 7 R 0.0 R 0.0 R 0.0)
+   (GLUE D 8 R 0.0 R 0.0 R 0.0)
+   (GLUE D 9 R 0.0 R 0.0 R 0.0)
+   (GLUE D 10 R 0.0 R 0.0 R 0.0)
+   (GLUE D 11 R 0.0 R 0.0 R 0.0)
+   (GLUE D 12 R 0.0 R 0.0 R 0.0)
+   (GLUE D 13 R 0.0 R 0.0 R 0.0)
+   (STOP)
+   (LABEL D 2)
+   (GLUE D 0 R 0.5 R 0.0 R 0.5)
+<% if is_zenkakunibu then %>
+   (GLUE D 1 R 0.0 R 0.0 R 0.5)
+<% else -- is_zenkakunibu %>
+   (GLUE D 1 R 0.5 R 0.0 R 0.5)
+<% end -- is_zenkakunibu %>
+   (GLUE D 2 R 0.0 R 0.0 R 0.0)
+   (GLUE D 3 R 0.5 R 0.0 R 0.5)
+   (GLUE D 4 R 0.25 R 0.0 R 0.25)
+   (GLUE D 5 R 0.0 R 0.0 R 0.0)
+   (GLUE D 6 R 0.0 R 0.0 R 0.0)
+   (GLUE D 7 R 0.5 R 0.0 R 0.5)
+   (GLUE D 8 R 0.5 R 0.0 R 0.5)
+   (GLUE D 9 R 0.5 R 0.0 R 0.5)
+   (GLUE D 10 R 0.0 R 0.0 R 0.0)
+   (GLUE D 11 R 0.5 R 0.0 R 0.5)
+   (GLUE D 12 R 0.5 R 0.0 R 0.5)
+   (GLUE D 13 R 0.5 R 0.0 R 0.5)
+   (STOP)
+   (LABEL D 3)
+<% if is_zenkakunibu then %>
+   (GLUE D 1 R 0.0 R 0.0 R 0.5)
+<% else -- is_zenkakunibu %>
+   (GLUE D 1 R 0.5 R 0.0 R 0.5)
+<% end -- is_zenkakunibu %>
+   (GLUE D 2 R 0.0 R 0.0 R 0.0)
+   (GLUE D 3 R 0.0 R 0.0 R 0.0)
+   (GLUE D 4 R 0.25 R 0.0 R 0.25)
+   (GLUE D 5 R 0.0 R 0.0 R 0.0)
+   (GLUE D 6 R 0.0 R 0.0 R 0.0)
+   (GLUE D 7 R 0.0 R 0.0 R 0.0)
+   (GLUE D 8 R 0.0 R 0.0 R 0.0)
+   (GLUE D 9 R 0.0 R 0.0 R 0.0)
+   (GLUE D 10 R 0.0 R 0.0 R 0.0)
+   (GLUE D 11 R 0.0 R 0.0 R 0.0)
+   (GLUE D 12 R 0.0 R 0.0 R 0.0)
+   (GLUE D 13 R 0.0 R 0.0 R 0.0)
+   (STOP)
+   (LABEL D 4)
+   (GLUE D 0 R 0.25 R 0.0 R 0.25)
+<% if is_zenkakunibu then %>
+   (GLUE D 1 R -0.25 R 0.0 R 0.25)
+<% else -- is_zenkakunibu %>
+   (GLUE D 1 R 0.25 R 0.0 R 0.25)
+<% end -- is_zenkakunibu %>
+   (GLUE D 2 R 0.25 R 0.0 R 0.25)
+   (GLUE D 3 R 0.25 R 0.0 R 0.25)
+   (GLUE D 4 R 0.5 R 0.0 R 0.5)
+   (GLUE D 5 R 0.25 R 0.0 R 0.25)
+   (GLUE D 6 R 0.25 R 0.0 R 0.25)
+   (GLUE D 7 R 0.25 R 0.0 R 0.25)
+   (GLUE D 8 R 0.25 R 0.0 R 0.25)
+   (GLUE D 9 R 0.25 R 0.0 R 0.25)
+   (GLUE D 10 R 0.25 R 0.0 R 0.25)
+   (GLUE D 11 R 0.25 R 0.0 R 0.25)
+   (GLUE D 12 R 0.25 R 0.0 R 0.25)
+   (GLUE D 13 R 0.25 R 0.0 R 0.25)
+   (STOP)
+   (LABEL D 5)
+<% if is_burasage then %>
+   (GLUE D 0 R 1.0 R 0.0 R 0.0)
+<%  if is_zenkakunibu then %>
+   (GLUE D 1 R 0.5 R 0.0 R 0.0)
+<%  else -- is_zenkakunibu %>
+   (GLUE D 1 R 1.0 R 0.0 R 0.0)
+<%  end -- is_zenkakunibu %>
+   (GLUE D 2 R 0.5 R 0.0 R 0.0)
+   (GLUE D 3 R 1.0 R 0.0 R 0.0)
+   (GLUE D 4 R 1.25 R 0.0 R 0.25)
+   (GLUE D 5 R 0.5 R 0.0 R 0.0)
+   (GLUE D 6 R 0.5 R 0.0 R 0.0)
+   (GLUE D 7 R 1.0 R 0.0 R 0.0)
+   (GLUE D 8 R 1.0 R 0.0 R 0.0)
+   (GLUE D 9 R 1.0 R 0.0 R 0.0)
+   (GLUE D 10 R 1.0 R 0.0 R 0.0)
+   (GLUE D 11 R 1.0 R 0.0 R 0.0)
+   (GLUE D 12 R 1.0 R 0.0 R 0.0)
+   (GLUE D 13 R 1.0 R 0.0 R 0.0)
+<% else -- is_burasage %>
+   (GLUE D 0 R 0.5 R 0.0 R 0.0)
+<%  if is_zenkakunibu then %>
+   (GLUE D 1 R 0.0 R 0.0 R 0.0)
+<%  else -- is_zenkakunibu %>
+   (GLUE D 1 R 0.5 R 0.0 R 0.0)
+<%  end -- is_zenkakunibu %>
+   (GLUE D 2 R 0.0 R 0.0 R 0.0)
+   (GLUE D 3 R 0.5 R 0.0 R 0.0)
+   (GLUE D 4 R 0.75 R 0.0 R 0.25)
+   (GLUE D 5 R 0.0 R 0.0 R 0.0)
+   (GLUE D 6 R 0.0 R 0.0 R 0.0)
+   (GLUE D 7 R 0.5 R 0.0 R 0.0)
+   (GLUE D 8 R 0.5 R 0.0 R 0.0)
+   (GLUE D 9 R 0.5 R 0.0 R 0.0)
+   (GLUE D 10 R 0.5 R 0.0 R 0.0)
+   (GLUE D 11 R 0.5 R 0.0 R 0.0)
+   (GLUE D 12 R 0.5 R 0.0 R 0.0)
+   (GLUE D 13 R 0.5 R 0.0 R 0.0)
+<% end -- is_burasage %>
+   (STOP)
+   (LABEL D 6)
+<% if is_burasage then %>
+   (GLUE D 0 R 1.0 R 0.0 R 0.5)
+<% if is_zenkakunibu then %>
+   (GLUE D 1 R 0.5 R 0.0 R 0.5)
+<% else -- is_zenkakunibu %>
+   (GLUE D 1 R 1.0 R 0.0 R 0.5)
+<% end -- is_zenkakunibu %>
+   (GLUE D 2 R 0.5 R 0.0 R 0.0)
+   (GLUE D 3 R 1.0 R 0.0 R 0.5)
+   (GLUE D 4 R 1.25 R 0.0 R 0.75)
+   (GLUE D 5 R 0.5 R 0.0 R 0.0)
+   (GLUE D 6 R 0.5 R 0.0 R 0.0)
+   (GLUE D 7 R 1.0 R 0.0 R 0.5)
+   (GLUE D 8 R 1.0 R 0.0 R 0.5)
+   (GLUE D 9 R 1.0 R 0.0 R 0.5)
+   (GLUE D 10 R 1.0 R 0.0 R 0.5)
+   (GLUE D 11 R 1.0 R 0.0 R 0.5)
+   (GLUE D 12 R 1.0 R 0.0 R 0.5)
+   (GLUE D 13 R 1.0 R 0.0 R 0.5)
+<% else -- is_burasage %>
+   (GLUE D 0 R 0.5 R 0.0 R 0.5)
+<% if is_zenkakunibu then %>
+   (GLUE D 1 R 0.0 R 0.0 R 0.5)
+<% else -- is_zenkakunibu %>
+   (GLUE D 1 R 0.5 R 0.0 R 0.5)
+<% end -- is_zenkakunibu %>
+   (GLUE D 2 R 0.0 R 0.0 R 0.0)
+   (GLUE D 3 R 0.5 R 0.0 R 0.5)
+   (GLUE D 4 R 0.75 R 0.0 R 0.75)
+   (GLUE D 5 R 0.0 R 0.0 R 0.0)
+   (GLUE D 6 R 0.0 R 0.0 R 0.0)
+   (GLUE D 7 R 0.5 R 0.0 R 0.5)
+   (GLUE D 8 R 0.5 R 0.0 R 0.5)
+   (GLUE D 9 R 0.5 R 0.0 R 0.5)
+   (GLUE D 10 R 0.5 R 0.0 R 0.5)
+   (GLUE D 11 R 0.5 R 0.0 R 0.5)
+   (GLUE D 12 R 0.5 R 0.0 R 0.5)
+   (GLUE D 13 R 0.5 R 0.0 R 0.5)
+<% end -- is_burasage %>
+   (STOP)
+   (LABEL D 7)
+   (GLUE D 0 R 0.0 R 0.25 R 0.0)
+<% if is_zenkakunibu then %>
+   (GLUE D 1 R 0.0 R 0.0 R 0.5)
+<% else -- is_zenkakunibu %>
+   (GLUE D 1 R 0.5 R 0.0 R 0.5)
+<% end -- is_zenkakunibu %>
+   (GLUE D 2 R 0.0 R 0.0 R 0.0)
+   (GLUE D 3 R 0.0 R 0.0 R 0.0)
+   (GLUE D 4 R 0.25 R 0.0 R 0.25)
+   (GLUE D 5 R 0.0 R 0.0 R 0.0)
+   (GLUE D 6 R 0.0 R 0.0 R 0.0)
+   (GLUE D 7 R 0.0 R 0.0 R 0.0)
+   (GLUE D 10 R 0.0 R 0.0 R 0.0)
+   (GLUE D 12 R 0.0 R 0.0 R 0.0)
+   (GLUE D 13 R 0.0 R 0.0 R 0.0)
+   (STOP)
+   (LABEL D 8)
+<% if is_zenkakunibu then %>
+   (GLUE D 1 R 0.0 R 0.0 R 0.5)
+<% else -- is_zenkakunibu %>
+   (GLUE D 1 R 0.5 R 0.0 R 0.5)
+<% end -- is_zenkakunibu %>
+   (GLUE D 2 R 0.0 R 0.0 R 0.0)
+   (GLUE D 3 R 0.0 R 0.0 R 0.0)
+   (GLUE D 4 R 0.25 R 0.0 R 0.25)
+   (GLUE D 5 R 0.0 R 0.0 R 0.0)
+   (GLUE D 6 R 0.0 R 0.0 R 0.0)
+   (GLUE D 7 R 0.0 R 0.0 R 0.0)
+   (GLUE D 10 R 0.0 R 0.0 R 0.0)
+   (GLUE D 12 R 0.0 R 0.0 R 0.0)
+   (GLUE D 13 R 0.0 R 0.0 R 0.0)
+   (STOP)
+   (LABEL D 9)
+   (GLUE D 0 R 0.0 R 0.25 R 0.0)
+<% if is_zenkakunibu then %>
+   (GLUE D 1 R 0.0 R 0.0 R 0.5)
+<% else -- is_zenkakunibu %>
+   (GLUE D 1 R 0.5 R 0.0 R 0.5)
+<% end -- is_zenkakunibu %>
+   (GLUE D 2 R 0.0 R 0.0 R 0.0)
+   (GLUE D 3 R 0.0 R 0.0 R 0.0)
+   (GLUE D 4 R 0.25 R 0.0 R 0.25)
+   (GLUE D 5 R 0.0 R 0.0 R 0.0)
+   (GLUE D 6 R 0.0 R 0.0 R 0.0)
+   (GLUE D 10 R 0.0 R 0.0 R 0.0)
+   (GLUE D 12 R 0.0 R 0.0 R 0.0)
+   (GLUE D 13 R 0.0 R 0.0 R 0.0)
+   (STOP)
+   (LABEL D 10)
+   (GLUE D 0 R 0.0 R 0.0 R 0.0)
+<% if is_zenkakunibu then %>
+   (GLUE D 1 R -0.5 R 0.0 R 0.0)
+<% else -- is_zenkakunibu %>
+   (GLUE D 1 R 0.0 R 0.0 R 0.0)
+<% end -- is_zenkakunibu %>
+   (GLUE D 2 R 0.0 R 0.0 R 0.0)
+   (GLUE D 3 R 0.0 R 0.0 R 0.0)
+   (GLUE D 4 R 0.25 R 0.0 R 0.25)
+   (GLUE D 5 R 0.0 R 0.0 R 0.0)
+   (GLUE D 6 R 0.0 R 0.0 R 0.0)
+   (GLUE D 7 R 0.0 R 0.0 R 0.0)
+   (GLUE D 8 R 0.0 R 0.0 R 0.0)
+   (GLUE D 9 R 0.0 R 0.0 R 0.0)
+   (GLUE D 10 R 0.0 R 0.0 R 0.0)
+   (GLUE D 11 R 0.0 R 0.0 R 0.0)
+   (GLUE D 12 R 0.0 R 0.0 R 0.0)
+   (GLUE D 13 R 0.0 R 0.0 R 0.0)
+   (STOP)
+   (LABEL D 11)
+<% if is_zenkakunibu then %>
+   (GLUE D 1 R 0.0 R 0.0 R 0.5)
+<% else -- is_zenkakunibu %>
+   (GLUE D 1 R 0.5 R 0.0 R 0.5)
+<% end -- is_zenkakunibu %>
+   (GLUE D 2 R 0.0 R 0.0 R 0.0)
+   (GLUE D 3 R 0.0 R 0.0 R 0.0)
+   (GLUE D 4 R 0.25 R 0.0 R 0.25)
+   (GLUE D 5 R 0.0 R 0.0 R 0.0)
+   (GLUE D 6 R 0.0 R 0.0 R 0.0)
+   (GLUE D 10 R 0.0 R 0.0 R 0.0)
+   (GLUE D 12 R 0.0 R 0.0 R 0.0)
+   (GLUE D 13 R 0.0 R 0.0 R 0.0)
+   (STOP)
+   (LABEL D 12)
+   (GLUE D 0 R 0.0 R 0.0 R 0.0)
+<% if is_zenkakunibu then %>
+   (GLUE D 1 R 0.0 R 0.0 R 0.5)
+<% else -- is_zenkakunibu %>
+   (GLUE D 1 R 0.5 R 0.0 R 0.5)
+<% end -- is_zenkakunibu %>
+   (GLUE D 2 R 0.0 R 0.0 R 0.0)
+   (GLUE D 3 R 0.0 R 0.0 R 0.0)
+   (GLUE D 4 R 0.25 R 0.0 R 0.25)
+   (GLUE D 5 R 0.0 R 0.0 R 0.0)
+   (GLUE D 6 R 0.0 R 0.0 R 0.0)
+   (GLUE D 7 R 0.0 R 0.0 R 0.0)
+   (GLUE D 8 R 0.0 R 0.0 R 0.0)
+   (GLUE D 9 R 0.0 R 0.0 R 0.0)
+   (GLUE D 10 R 0.0 R 0.0 R 0.0)
+   (GLUE D 11 R 0.0 R 0.0 R 0.0)
+   (GLUE D 12 R 0.0 R 0.0 R 0.0)
+   (GLUE D 13 R 0.0 R 0.0 R 0.0)
+   (STOP)
+   (LABEL D 13)
+   (GLUE D 0 R 0.0 R 0.0 R 0.0)
+<% if is_zenkakunibu then %>
+   (GLUE D 1 R 0.0 R 0.0 R 0.5)
+<% else -- is_zenkakunibu %>
+   (GLUE D 1 R 0.5 R 0.0 R 0.5)
+<% end -- is_zenkakunibu %>
+   (GLUE D 2 R 0.0 R 0.0 R 0.0)
+   (GLUE D 3 R 0.0 R 0.0 R 0.0)
+   (GLUE D 4 R 0.25 R 0.0 R 0.25)
+   (GLUE D 5 R 0.0 R 0.0 R 0.0)
+   (GLUE D 6 R 0.0 R 0.0 R 0.0)
+   (GLUE D 7 R 0.0 R 0.0 R 0.0)
+   (GLUE D 8 R 0.0 R 0.0 R 0.0)
+   (GLUE D 9 R 0.0 R 0.0 R 0.0)
+   (GLUE D 10 R 0.0 R 0.0 R 0.0)
+   (GLUE D 11 R 0.0 R 0.0 R 0.0)
+   (GLUE D 12 R 0.0 R 0.0 R 0.0)
+   (GLUE D 13 R 0.0 R 0.0 R 0.0)
+   (STOP)
+   )
+(CHARSINTYPE D 1
+   X2146 X2148 X214A X214C X214E X2150 X2152 X2154 X2156 X2158 X215A
+   )
+(CHARSINTYPE D 2
+   X2147 X2149 X214B X214D X214F X2151 X2153 X2155 X2157 X2159 X215B
+   )
+(CHARSINTYPE D 3
+   X2129 X212A
+   )
+(CHARSINTYPE D 4
+   X2126 X2127 X2128
+   )
+(CHARSINTYPE D 5
+   X2123 X2125
+   )
+(CHARSINTYPE D 6
+   X2122 X2124
+   )
+(CHARSINTYPE D 7
+   X213D X2144 X2145
+   )
+(CHARSINTYPE D 8
+   X2133 X2134 X2135 X2136 X2139 X213C X2421 X2423 X2425 X2427 X2429
+   X2443 X2463 X2465 X2467 X246E X2521 X2523 X2525 X2527 X2529 X2543
+   X2563 X2565 X2567 X256E X2575 X2576
+   )
+(CHARSINTYPE D 9
+   (CTRANGE H 216B H 2174)
+   X2273
+   )
+(CHARSINTYPE D 10
+   X2121
+   )
+(CHARSINTYPE D 11
+   X2422 X2424 X2426 X2428
+   (CTRANGE H 242A H 2442)
+   (CTRANGE H 2444 H 2462)
+   X2464 X2466 X2468 X2469 X246A X246B X246C X246D X246F X2470 X2471
+   X2472 X2473 X2522 X2524 X2526 X2528
+   (CTRANGE H 252A H 2542)
+   (CTRANGE H 2544 H 2562)
+   X2564 X2566 X2568 X2569 X256A X256B X256C X256D X256F X2570 X2571
+   X2572 X2573 X2574
+   )
+(CHARSINTYPE D 12
+   X213E
+   )
+(CHARSINTYPE D 13
+   X2141
+   )
+(TYPE D 0
+   (CHARWD R 1.0)
+   (CHARHT R 0.5)
+   (CHARDP R 0.5)
+   )
+(TYPE D 1
+<% if is_zenkakunibu then %>
+   (CHARWD R 1.0)
+<% else -- is_zenkakunibu %>
+   (CHARWD R 0.5)
+<% end -- is_zenkakunibu %>
+   (CHARHT R 0.5)
+   (CHARDP R 0.5)
+   )
+(TYPE D 2
+   (CHARWD R 0.5)
+   (CHARHT R 0.5)
+   (CHARDP R 0.5)
+   )
+(TYPE D 3
+   (CHARWD R 1.0)
+   (CHARHT R 0.5)
+   (CHARDP R 0.5)
+   )
+(TYPE D 4
+   (CHARWD R 0.5)
+   (CHARHT R 0.5)
+   (CHARDP R 0.5)
+   )
+(TYPE D 5
+<% if is_burasage then %>
+   (CHARWD R 0.0)
+<% else -- is_burasage %>
+   (CHARWD R 0.5)
+<% end -- is_burasage %>
+   (CHARHT R 0.5)
+   (CHARDP R 0.5)
+   )
+(TYPE D 6
+<% if is_burasage then %>
+   (CHARWD R 0.0)
+<% else -- is_burasage %>
+   (CHARWD R 0.5)
+<% end -- is_burasage %>
+   (CHARHT R 0.5)
+   (CHARDP R 0.5)
+   )
+(TYPE D 7
+   (CHARWD R 1.0)
+   (CHARHT R 0.5)
+   (CHARDP R 0.5)
+   )
+(TYPE D 8
+   (CHARWD R 1.0)
+   (CHARHT R 0.5)
+   (CHARDP R 0.5)
+   )
+(TYPE D 9
+   (CHARWD R 1.0)
+   (CHARHT R 0.5)
+   (CHARDP R 0.5)
+   )
+(TYPE D 10
+   (CHARWD R 1.0)
+   (CHARHT R 0.5)
+   (CHARDP R 0.5)
+   )
+(TYPE D 11
+   (CHARWD R 1.0)
+   (CHARHT R 0.5)
+   (CHARDP R 0.5)
+   )
+(TYPE D 12
+   (CHARWD R 0.25)
+   (CHARHT R 0.5)
+   (CHARDP R 0.5)
+   )
+(TYPE D 13
+   (CHARWD R 1.0)
+   (CHARHT R 0.5)
+   (CHARDP R 0.5)
+   )

@@ -1,0 +1,229 @@
+(VTITLE )
+(DESIGNSIZE R 10.0)
+(CHECKSUM O 0)
+(MAPFONT D 0
+   (FONTNAME uph<%= shape %><%= jis2004_n %>-v)
+   (FONTCHECKSUM O 0)
+   (FONTAT R 1.0)
+   (FONTDSIZE R 10.0)
+   )
+<% if is_expert then %>
+(MAPFONT D 1
+   (FONTNAME otf-cj<%= cid_shape %>-v)
+   (FONTCHECKSUM O 0)
+   (FONTAT R 1.0)
+   (FONTDSIZE R 10.0)
+   )
+<% end %>
+<% if not is_zenkakunibu then %>
+(CHARACTER H 00AB
+   (CHARWD R 0.5)
+   (MAP
+      (MOVERIGHT R -0.5)
+      (SETCHAR H 00AB)
+      )
+   )
+<% end -- not is_zenkakunibu %>
+(CHARACTER H 2010
+   (CHARWD R 0.25)
+   (MAP
+      (MOVERIGHT R -0.375)
+      (SETCHAR H 2010)
+      )
+   )
+(CHARACTER H 2013
+   (CHARWD R 0.5)
+   (MAP
+      (MOVERIGHT R -0.25)
+      (SETCHAR H 2013)
+      )
+   )
+<% if not is_zenkakunibu then %>
+(CHARACTER H 2018
+   (CHARWD R 0.5)
+   (MAP
+      (MOVERIGHT R -0.5)
+      (SETCHAR H 2018)
+      )
+   )
+(CHARACTER H 201C
+   (CHARWD R 0.5)
+   (MAP
+      (MOVERIGHT R -0.5)
+      (SETCHAR H 201C)
+      )
+   )
+<% end -- not is_zenkakunibu %>
+<%
+   if not is_zenkakunibu then
+      local openingbrackets = {
+         "3008", "300A", "300C", "300E", "3010", "3014", "3016", "3018", "301D",
+      }
+      for _, c in ipairs(openingbrackets) do
+%>
+(CHARACTER H <%= c %>
+   (CHARWD R 0.5)
+   (MAP
+      (MOVERIGHT R -0.5)
+      (SETCHAR H <%= c %>)
+      )
+   )
+<%
+      end
+   end -- is_zenkakunibu
+
+   if is_expert then
+      local uni_expert = {
+         [0x3041] = 12458, [0x3042] = 12459, [0x3043] = 12460, [0x3044] = 12461,
+         [0x3045] = 12462, [0x3046] = 12463, [0x3047] = 12464, [0x3048] = 12465,
+         [0x3049] = 12466, [0x304A] = 12467, [0x304B] = 12469, [0x304C] = 12470,
+         [0x304D] = 12471, [0x304E] = 12472, [0x304F] = 12473, [0x3050] = 12474,
+         [0x3051] = 12476, [0x3052] = 12477, [0x3053] = 12479, [0x3054] = 12480,
+         [0x3055] = 12481, [0x3056] = 12482, [0x3057] = 12483, [0x3058] = 12484,
+         [0x3059] = 12485, [0x305A] = 12486, [0x305B] = 12487, [0x305C] = 12488,
+         [0x305D] = 12489, [0x305E] = 12490, [0x305F] = 12491, [0x3060] = 12492,
+         [0x3061] = 12493, [0x3062] = 12494, [0x3063] = 12495, [0x3064] = 12496,
+         [0x3065] = 12497, [0x3066] = 12498, [0x3067] = 12499, [0x3068] = 12500,
+         [0x3069] = 12501, [0x306A] = 12502, [0x306B] = 12503, [0x306C] = 12504,
+         [0x306D] = 12505, [0x306E] = 12506, [0x306F] = 12507, [0x3070] = 12508,
+         [0x3071] = 12509, [0x3072] = 12510, [0x3073] = 12511, [0x3074] = 12512,
+         [0x3075] = 12513, [0x3076] = 12514, [0x3077] = 12515, [0x3078] = 12516,
+         [0x3079] = 12517, [0x307A] = 12518, [0x307B] = 12519, [0x307C] = 12520,
+         [0x307D] = 12521, [0x307E] = 12522, [0x307F] = 12523, [0x3080] = 12524,
+         [0x3081] = 12525, [0x3082] = 12526, [0x3083] = 12527, [0x3084] = 12528,
+         [0x3085] = 12529, [0x3086] = 12530, [0x3087] = 12531, [0x3088] = 12532,
+         [0x3089] = 12533, [0x308A] = 12534, [0x308B] = 12535, [0x308C] = 12536,
+         [0x308D] = 12537, [0x308E] = 12538, [0x308F] = 12539, [0x3090] = 12540,
+         [0x3091] = 12541, [0x3092] = 12542, [0x3093] = 12543, [0x3094] = 12544,
+         [0x3095] = 12468, [0x3096] = 12475, [0x309D] = 12456, [0x309E] = 12457,
+      }
+      for uni, cid in kpairs(uni_expert) do
+%>
+(CHARACTER H <%= string.format('%04X', uni) %>
+   (CHARWD R 1.0)
+   (MAP
+      (SELECTFONT D 1)
+      (SETCHAR H <%= string.format('%04X', cid) %>)
+      )
+   )
+<%
+      end
+   end -- is_expert
+%>
+(CHARACTER H 30A0
+   (CHARWD R 0.5)
+   (MAP
+      (MOVERIGHT R -0.25)
+      (SETCHAR H 30A0)
+      )
+   )
+<%
+   if is_expert then
+      local uni_expert = {
+         [0x30A1] = 12548, [0x30A2] = 12549, [0x30A3] = 12550, [0x30A4] = 12551,
+         [0x30A5] = 12552, [0x30A6] = 12553, [0x30A7] = 12554, [0x30A8] = 12555,
+         [0x30A9] = 12556, [0x30AA] = 12557, [0x30AB] = 12559, [0x30AC] = 12560,
+         [0x30AD] = 12561, [0x30AE] = 12562, [0x30AF] = 12563, [0x30B0] = 12564,
+         [0x30B1] = 12566, [0x30B2] = 12567, [0x30B3] = 12569, [0x30B4] = 12570,
+         [0x30B5] = 12571, [0x30B6] = 12572, [0x30B7] = 12573, [0x30B8] = 12574,
+         [0x30B9] = 12575, [0x30BA] = 12576, [0x30BB] = 12577, [0x30BC] = 12578,
+         [0x30BD] = 12579, [0x30BE] = 12580, [0x30BF] = 12581, [0x30C0] = 12582,
+         [0x30C1] = 12583, [0x30C2] = 12584, [0x30C3] = 12585, [0x30C4] = 12586,
+         [0x30C5] = 12587, [0x30C6] = 12588, [0x30C7] = 12589, [0x30C8] = 12590,
+         [0x30C9] = 12591, [0x30CA] = 12592, [0x30CB] = 12593, [0x30CC] = 12594,
+         [0x30CD] = 12595, [0x30CE] = 12596, [0x30CF] = 12597, [0x30D0] = 12598,
+         [0x30D1] = 12599, [0x30D2] = 12600, [0x30D3] = 12601, [0x30D4] = 12602,
+         [0x30D5] = 12603, [0x30D6] = 12604, [0x30D7] = 12605, [0x30D8] = 12606,
+         [0x30D9] = 12607, [0x30DA] = 12608, [0x30DB] = 12609, [0x30DC] = 12610,
+         [0x30DD] = 12611, [0x30DE] = 12612, [0x30DF] = 12613, [0x30E0] = 12614,
+         [0x30E1] = 12615, [0x30E2] = 12616, [0x30E3] = 12617, [0x30E4] = 12618,
+         [0x30E5] = 12619, [0x30E6] = 12620, [0x30E7] = 12621, [0x30E8] = 12622,
+         [0x30E9] = 12623, [0x30EA] = 12624, [0x30EB] = 12625, [0x30EC] = 12626,
+         [0x30ED] = 12627, [0x30EE] = 12628, [0x30EF] = 12629, [0x30F0] = 12630,
+         [0x30F1] = 12631, [0x30F2] = 12632, [0x30F3] = 12633, [0x30F4] = 12634,
+         [0x30F5] = 12558, [0x30F6] = 12565, [0x30F7] = 12635, [0x30F8] = 12636,
+         [0x30F9] = 12637, [0x30FA] = 12638,
+      }
+      for uni, cid in kpairs(uni_expert) do
+%>
+(CHARACTER H <%= string.format('%04X', uni) %>
+   (CHARWD R 1.0)
+   (MAP
+      (SELECTFONT D 1)
+      (SETCHAR H <%= string.format('%04X', cid) %>)
+      )
+   )
+<%
+      end
+   end -- is_expert
+%>
+(CHARACTER H 30FB
+   (CHARWD R 0.5)
+   (MAP
+      (MOVERIGHT R -0.25)
+      (SETCHAR H 30FB)
+      )
+   )
+<%
+   if is_expert then
+      local uni_expert = {
+         [0x30FC] = 12547, [0x30FD] = 12545, [0x30FE] = 12546, [0x31F0] = 16395,
+         [0x31F1] = 16396, [0x31F2] = 16397, [0x31F3] = 16398, [0x31F4] = 16399,
+         [0x31F5] = 16400, [0x31F6] = 16401, [0x31F7] = 16402, [0x31F8] = 16403,
+         [0x31F9] = 16404, [0x31FA] = 16406, [0x31FB] = 16407, [0x31FC] = 16408,
+         [0x31FD] = 16409, [0x31FE] = 16410, [0x31FF] = 16411,
+      }
+      for uni, cid in kpairs(uni_expert) do
+%>
+(CHARACTER H <%= string.format('%04X', uni) %>
+   (CHARWD R 1.0)
+   (MAP
+      (SELECTFONT D 1)
+      (SETCHAR H <%= string.format('%04X', cid) %>)
+      )
+   )
+<%
+      end
+   end -- is_expert
+%>
+<% if not is_zenkakunibu then %>
+(CHARACTER H FF08
+   (CHARWD R 0.5)
+   (MAP
+      (MOVERIGHT R -0.5)
+      (SETCHAR H FF08)
+      )
+   )
+<% end -- not is_zenkakunibu %>
+(CHARACTER H FF1A
+   (CHARWD R 0.5)
+   (MAP
+      (MOVERIGHT R -0.25)
+      (SETCHAR H FF1A)
+      )
+   )
+(CHARACTER H FF1B
+   (CHARWD R 0.5)
+   (MAP
+      (MOVERIGHT R -0.25)
+      (SETCHAR H FF1B)
+      )
+   )
+<%
+   if not is_zenkakunibu then
+      local openingbrackets = {
+         "FF3B", "FF5B", "FF5F",
+      }
+      for _, c in ipairs(openingbrackets) do
+%>
+(CHARACTER H <%= c %>
+   (CHARWD R 0.5)
+   (MAP
+      (MOVERIGHT R -0.5)
+      (SETCHAR H <%= c %>)
+      )
+   )
+<%
+      end
+   end -- is_zenkakunibu
+%>
