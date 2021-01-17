@@ -1,0 +1,22 @@
+\ExplSyntaxOn
+
+\tl_const:Nn \c_jldx_test_target_tl {亜‘’？・。、‥ヽ℃　あ‐＝〜}
+
+\box_new:N \l_jldx_test_box
+
+\cs_new:Npn \jldx_test_metrics:n #1
+  {
+    \tl_map_inline:Nn \c_jldx_test_target_tl
+      {
+        \tl_map_inline:Nn \c_jldx_test_target_tl
+          {
+            \hbox_set:Nn \l_jldx_test_box
+              { #1 ##1 ####1 }
+            \box_log:N \l_jldx_test_box
+          }
+      }
+  }
+
+\cs_new_eq:NN \TestMetrics \jldx_test_metrics:n
+
+\ExplSyntaxOff

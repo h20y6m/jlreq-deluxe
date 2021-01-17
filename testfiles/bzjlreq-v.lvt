@@ -3,25 +3,25 @@
 \usepackage{jlreq-deluxe}
 
 \input{regression-test.tex}
-\input{test.tex}
+\input{test-metrics.tex}
 
 \begin{document}
 
 \START
 
-\test{minl}{\mcfamily\ltseries}
+\TEST{minl}{\TestMetrics{\mcfamily\ltseries}}
 
-\test{minr}{\mcfamily\mdseries}
+\TEST{minr}{\TestMetrics{\mcfamily\mdseries}}
 
-\test{minb}{\mcfamily\bfseries}
+\TEST{minb}{\TestMetrics{\mcfamily\bfseries}}
 
-\test{gothr}{\gtfamily\mdseries}
+\TEST{gothr}{\TestMetrics{\gtfamily\mdseries}}
 
-\test{gothb}{\gtfamily\bfseries}
+\TEST{gothb}{\TestMetrics{\gtfamily\bfseries}}
 
-\test{gotheb}{\gtfamily\ebseries}
+\TEST{gotheb}{\TestMetrics{\gtfamily\ebseries}}
 
-\test{mgothr}{\mgfamily\mdseries}
+\TEST{mgothr}{\TestMetrics{\mgfamily\mdseries}}
 
 \END
 
