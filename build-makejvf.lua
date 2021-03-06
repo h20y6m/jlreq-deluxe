@@ -64,35 +64,38 @@ local function make_vf_all(srcdir,dstdir)
   for _,b in ipairs({ "", "b" }) do
     for _,z in ipairs({ "", "z" }) do
       for _,u in ipairs({ "", "up" }) do
-        for _,e in ipairs({ "nml", "exp" }) do
+        for _,e in ipairs({ "nml", "exp", "ruby" }) do
           for _,s in pairs(font_series_list) do
             for _,n in ipairs({ "", "n" }) do
               for _,v in ipairs({"-h","-v"}) do
-                local zvpeluname = "jlreq--" .. u .. "template" .. v
-                local zpleluname = "jlreq--" .. u .. "template" .. v
-                local vfname = b .. z .. "jlreq--" .. u .. e .. s[1] .. n .. v
-                local zvpelufile = zvpeluname .. ".zvp0.elu"
-                local zplelufile = zpleluname .. ".zpl.elu"
-                local zvpfile = vfname .. ".zvp0"
-                local zplfile = vfname .. ".zpl"
-                local zvpelupath = srcdir .. "/" .. zvpelufile
-                local zplelupath = srcdir .. "/" .. zplelufile
-                local zvppath = dstdir .. "/" .. zvpfile
-                local zplpath = dstdir .. "/" .. zplfile
-                local t = {}
-                t.kpairs = kpairs
-                t.shape = s[1]
-                t.cid_shape = s[2]
-                t.is_burasage = b == "b"
-                t.is_zenkakunibu = z == "z"
-                t.is_expert = e == "exp"
-                t.is_jis2004 = n == "n"
-                t.jis2004_n = n
-                print("Genarating "..vfname.." ...")
-                generate_zvp(zvpelupath,zvppath,t)
-                generate_zvp(zplelupath,zplpath,t)
-                jfmutil_zvp02vf(dstdir,zvpfile)
-                jfmutil_zpl2tfm(dstdir,zplfile)
+                if not (e == "ruby" and n == "n") then
+                  local zvpeluname = "jlreq--" .. u .. "template" .. v
+                  local zpleluname = "jlreq--" .. u .. "template" .. v
+                  local vfname = b .. z .. "jlreq--" .. u .. e .. s[1] .. n .. v
+                  local zvpelufile = zvpeluname .. ".zvp0.elu"
+                  local zplelufile = zpleluname .. ".zpl.elu"
+                  local zvpfile = vfname .. ".zvp0"
+                  local zplfile = vfname .. ".zpl"
+                  local zvpelupath = srcdir .. "/" .. zvpelufile
+                  local zplelupath = srcdir .. "/" .. zplelufile
+                  local zvppath = dstdir .. "/" .. zvpfile
+                  local zplpath = dstdir .. "/" .. zplfile
+                  local t = {}
+                  t.kpairs = kpairs
+                  t.shape = s[1]
+                  t.cid_shape = s[2]
+                  t.is_burasage = b == "b"
+                  t.is_zenkakunibu = z == "z"
+                  t.is_expert = e == "exp"
+                  t.is_ruby = e == "ruby"
+                  t.is_jis2004 = n == "n"
+                  t.jis2004_n = n
+                  print("Genarating "..vfname.." ...")
+                  generate_zvp(zvpelupath,zvppath,t)
+                  generate_zvp(zplelupath,zplpath,t)
+                  jfmutil_zvp02vf(dstdir,zvpfile)
+                  jfmutil_zpl2tfm(dstdir,zplfile)
+                end
               end
             end
           end
