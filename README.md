@@ -7,7 +7,10 @@ LaTeX: Multi-weight Japanese font support for jlreq class.
 
 * TeX format: LaTeX.
 * TeX engine: pTeX and upTeX.
-* DVI drivers: Anything that supports JFMs and VFs.
+* DVI drivers: Anything that Support feature of virtual font to fallback Japanese font definition.
+  - dvipdfmx Version 20200315 or later.
+  - dvips(k) 2021.1 or later.
+  - dvisvgm 2.11 or later.
 * Dependent packages:
   - pxjodel
 
@@ -29,6 +32,9 @@ This package is distributed under [the MIT License](LICENSE).
 History
 -------
 
+* Version 0.4.0 <2021/03/13>
+  - Compact virtual fonts.
+  - Add support for the ruby family.
 * Version 0.3.2 <2021/01/09>
   - Fix missing map JIS 0x213C to CID+12364 in exp*-h.vf.
 * Version 0.3.1 <2020/04/26>

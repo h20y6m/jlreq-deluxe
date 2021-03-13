@@ -11,7 +11,10 @@ jlreq クラスでは [JLReq](https://www.w3.org/TR/jlreq/?lang=ja) に従った
 
 * フォーマット：LaTeX
 * エンジン：pTeX 及び upTeX
-* DVIウェア：和文 TFM と VF をサポートするもの
+* DVIウェア：和文 VF の fallback 機能をサポートするもの
+  - dvipdfmx Version 20200315 以降
+  - dvips(k) 2021.1 以降
+  - dvisvgm 2.11 以降
 * 依存パッケージ：
   - pxjodel パッケージ
 
@@ -68,6 +71,9 @@ jlreq クラスでは [JLReq](https://www.w3.org/TR/jlreq/?lang=ja) に従った
 更新履歴
 -------
 
+* Version 0.4.0 <2021/03/13>
+  - 仮想フォントの軽量化
+  - ルビ用かなのサポート
 * Version 0.3.2 <2021/01/09>
   - `exp*-h.vf` の JIS 0x213C から CID+12364 への引き当てが抜けていたのを修正
 * Version 0.3.1 <2020/04/26>

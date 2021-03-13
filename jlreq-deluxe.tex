@@ -18,7 +18,7 @@
 
 \title{\pkg{jlreq-deluxe}パッケージ}
 \author{Yukimasa Morimi (h20y6m)\thanks{\url{https://github.com/h20y6m}}}
-\date{2021-01-09}
+\date{2021-03-13}
 
 \begin{document}
 
@@ -46,7 +46,12 @@
 \begin{itemize}
 \item \TeX フォーマット：\LaTeX
 \item \TeX エンジン：\pTeX 及び\upTeX
-\item DVIウェア：和文TFMとVFをサポートするもの
+\item DVIウェア：和文VFのfallback機能をサポートするもの
+  \begin{itemize}
+  \item dvipdfmx Version 20200315以降
+  \item dvips(k) 2021.1以降
+  \item dvisvgm 2.11以降
+  \end{itemize}
 \item 前提パッケージ：
   \begin{itemize}
   \item \pkg{pxjodel}パッケージ
