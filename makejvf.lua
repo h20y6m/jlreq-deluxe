@@ -1,4 +1,10 @@
-local elu = require("build-elu.lua")
+#!/usr/bin/env texlua
+kpse.set_program_name("kpsewhich")
+
+local lfs = require("lfs")
+
+local elu = require("./makejvf-elu.lua")
+local cmd = require("./makejvf-cmd.lua")
 
 makejvfdir = makejvfdir or "./build/makejvf"
 zvpfiledir = zvpfiledir or "./zvp"
@@ -106,12 +112,17 @@ local function make_vf_all(srcdir,dstdir)
 end
 
 function makejvf()
-  cleandir(makejvfdir)
+  mkdir(makejvfdir)
+  rm(makejvfdir, "*")
   make_vf_all(zvpfiledir,makejvfdir)
   vfname  = "*.vf"
   tfmname = "*.tfm"
+  mkdir(vffiledir)
+  mkdir(tfmfiledir)
   rm(vffiledir,vfname)
   rm(tfmfiledir,tfmname)
   cp(vfname,makejvfdir,vffiledir)
   cp(tfmname,makejvfdir,tfmfiledir)
 end
+
+makejvf()

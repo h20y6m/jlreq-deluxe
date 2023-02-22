@@ -53,3 +53,9 @@ function customize_copyctan(copyctan)
     cp("*.tfm", maindir .. "/tfm", ctandir .. "/" .. ctanpkg .. "/tfm")
   end
 end
+
+
+dvitopdf      = customize_dvitopdf(dvitopdf)
+typeset       = customize_typeset(typeset)
+install_files = customize_install_files(install_files)
+copyctan      = customize_copyctan(copyctan)

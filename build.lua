@@ -18,7 +18,7 @@ checksuppfiles   = {"texmf.cnf"}
 cleanfiles       = {"*.log", "*.pdf", "*.zip"}
 installfiles     = {"*.sty"}
 sourcefiles      = {"*.sty"}
-tagfiles         = {"*.sty"}
+tagfiles         = {"*.sty","*.tex","LICENSE"}
 textfiles        = {"*.md", "LICENSE"}
 typesetfiles     = {"*.tex"}
 typesetsuppfiles = {"texmf.cnf"}
@@ -38,35 +38,30 @@ typesetopts = " -kanji=utf8 -interaction=nonstopmode"
 checkruns   = 1
 typesetruns = 3
 
--- Get the .tfm and .vf files in the right place
-tdslocations =
-  {
-    "fonts/tfm/public/"..module.."/*.tfm",
-    "fonts/vf/public/"..module.."/*.vf",
-  }
 
--- Load the common build code
-dofile("./build-config.lua")
-dofile("./build-makejvf.lua")
-
-
--- Custom main function
-function main(target, names)
-  -- Add custom build target
-  target_list.makejvf = {func = makejvf, desc = "Make japanese virtual fonts"}
-
-  -- Customize build functions
-  dvitopdf      = customize_dvitopdf(dvitopdf)
-  typeset       = customize_typeset(typeset)
-  install_files = customize_install_files(install_files)
-  copyctan      = customize_copyctan(copyctan)
-
-  -- Call standard main function
-  stdmain(target, names)
+-- Detail how to set the version automatically
+function update_tag(file,content,tagname,tagdate)
+  local author = "Yukimasa Morimi"
+  if string.match(content,"Copyright %(c%)%s*(%d+)%S+ " .. author) then
+    local year = os.date("%Y")
+    content = string.gsub(content,
+      "Copyright %(c%)%s*(%d+)%S+ " .. author,
+      "Copyright (c) %1-" .. year .. " " .. author)
+    content = string.gsub(content,year .. "-" .. year,year)
+  end
+  if string.match(file,"%.sty$") then
+    content = string.gsub(content,
+      "\n\\ProvidesExplPackage {([^}]+)} {%d%d%d%d%-%d%d%-%d%d} {%d+%.%d+%.%d+}",
+      "\n\\ProvidesExplPackage {%1} {" .. tagdate .. "} {" .. tagname .. "}")
+  end
+  if string.match(file,"%.tex$") then
+    return string.gsub(content,
+      "\n\\date{%d%d%d%d%-%d%d%-%d%d}\n",
+      "\n\\date{" .. tagdate .. "}\n")
+  end
+  return content
 end
 
--- Find and run the build system
-kpse.set_program_name("kpsewhich")
-if not release_date then
-  dofile(kpse.lookup("l3build.lua"))
-end
+
+-- customize l3build internal functins
+dofile("./build-customize.lua")
