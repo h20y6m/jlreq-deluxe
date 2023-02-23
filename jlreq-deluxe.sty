@@ -95,7 +95,9 @@
 \__jldx_if_class_loaded:nT { jlreq }
   {
     % uplatex
-    \sys_if_engine_uptex:T
+    \bool_lazy_and:nnT
+      { \token_if_primitive_p:N \ucs }
+      { \int_compare_p:n { \ucs"FA4A = "FA4A } }
       {
         \bool_set_true:N \l__jldx_uplatex_bool
       }
