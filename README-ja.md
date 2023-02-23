@@ -71,6 +71,8 @@ jlreq クラスでは [JLReq](https://www.w3.org/TR/jlreq/?lang=ja) に従った
 更新履歴
 -------
 
+* Version 0.4.1 <2023/02/23>
+  - e-upTeX ベースの pLaTeX をサポート
 * Version 0.4.0 <2021/03/13>
   - 仮想フォントの軽量化
   - ルビ用かなのサポート

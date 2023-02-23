@@ -32,6 +32,8 @@ This package is distributed under [the MIT License](LICENSE).
 History
 -------
 
+* Version 0.4.1 <2023/02/23>
+  - Support e-upTeX based pLaTeX.
 * Version 0.4.0 <2021/03/13>
   - Compact virtual fonts.
   - Add support for the ruby family.
