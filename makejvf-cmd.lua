@@ -1,7 +1,7 @@
 function mkdir(dir)
   if os.type == "windows" then
     dir = string.gsub(dir,"/","\\")
-    return os.execute("if not exists " .. dir .. " mkdir " .. dir)
+    return os.execute("if not exist " .. dir .. " mkdir " .. dir)
   else
     return os.execute("mkdir -p " .. dir)
   end

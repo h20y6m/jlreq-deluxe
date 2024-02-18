@@ -288,4 +288,16 @@
 <%
       end
    end -- is_zenkakunibu
+
+   for c = 0xFF61, 0xFF9F do
+%>
+(CHARACTER H <%= string.format('%04X', c) %>
+   (CHARWD R 0.5)
+   (MAP
+      (MOVERIGHT R -0.25)
+      (SETCHAR H <%= string.format('%04X', c) %>)
+      )
+   )
+<%
+   end
 %>
