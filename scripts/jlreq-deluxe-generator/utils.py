@@ -52,7 +52,6 @@ def b2i(b):
     return v
 
 
-
 def to_f(b):
     return b2i(b) * FIXED_UNIT
 

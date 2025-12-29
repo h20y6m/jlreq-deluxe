@@ -42,7 +42,7 @@ class JFM:
         self.face: int = 0
 
         self.chars_type: Dict[int, int] = {}
-        self.char_info: List[CharInfo] = {}
+        self.char_info: List[CharInfo] = []
 
         self.slant: float = 0.0
         self.kanjiskip: Glue = Glue(0.0, 0.0, 0.0)
@@ -50,7 +50,7 @@ class JFM:
         self.zw: float = 10.0
         self.xkanjiskip: Glue = Glue(0.0, 0.0, 0.0)
 
-    def get_char_type(self, cc: int) -> float:
+    def get_char_type(self, cc: int) -> int:
         return self.chars_type[cc] if cc in self.chars_type else 0
 
     def get_type_width(self, char_type: int) -> float:
@@ -605,7 +605,7 @@ class JFM:
         pass
         glue_kern_table = []
         for t1, info1 in enumerate(self.char_info):
-            info1_glue_kern = info1[4]
+            info1_glue_kern = info1.glue_kern
             if info1_glue_kern is not None:
                 glue_kern_items = []
                 for t2, glue_kern_item in enumerate(info1_glue_kern):

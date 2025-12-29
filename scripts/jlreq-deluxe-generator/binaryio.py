@@ -1,12 +1,15 @@
 import io
 import logging
 import os
+from typing import BinaryIO
 
 logger = logging.getLogger(__name__)
 
 
 class BinaryReader:
     def __init__(self, file):
+        self.fp: BinaryIO | None
+
         # Check if we were passed a file-like object
         if isinstance(file, os.PathLike):
             file = os.fspath(file)
@@ -52,9 +55,13 @@ class BinaryReader:
         fp.close()
 
     def read_all(self):
+        if self.fp is None:
+            raise Exception("Not open")
         return self.fp.read()
 
     def read_exact(self, n):
+        if self.fp is None:
+            raise Exception("Not open")
         b = self.fp.read(n)
         if len(b) != n:
             raise EOFError()
@@ -109,7 +116,9 @@ class BinaryReader:
 
 class BinaryWriter:
     def __init__(self, file):
+        self.fp: BinaryIO | None
         self.size = 0
+
         # Check if we were passed a file-like object
         if isinstance(file, os.PathLike):
             file = os.fspath(file)
@@ -155,6 +164,8 @@ class BinaryWriter:
         fp.close()
 
     def write_bytes(self, b):
+        if self.fp is None:
+            raise Exception("Not open")
         self.size += len(b)
         self.fp.write(b)
 

@@ -198,6 +198,13 @@ class VF:
         self.char_packets: Dict[int, CharacterPacket] = {}
         self.default_font_num: int | None = None
 
+    def get_char_simple_dvi(self, k: int) -> SimpleDvi | None:
+        if k in self.char_packets:
+            char_packet = self.char_packets[k]
+            if isinstance(char_packet.dvi, SimpleDvi):
+                return char_packet.dvi
+        return None
+
     def load(self, file: str | BinaryIO):
         """VFファイルを読み込む。"""
         with BinaryReader(file) as reader:
@@ -313,7 +320,7 @@ class VF:
                 self._write_fnt_def(writer, self.default_font_num)
             for fnt_num in sorted(self.font_definitions.keys()):
                 if fnt_num != self.default_font_num:
-                    self._write_fnt_def(writer, self.default_font_num)
+                    self._write_fnt_def(writer, fnt_num)
 
             # character packets
             for cc in sorted(self.char_packets.keys()):
