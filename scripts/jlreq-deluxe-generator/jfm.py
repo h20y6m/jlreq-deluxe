@@ -335,13 +335,14 @@ class JFM:
         kern_table = []
         glue_table: List[Glue] = []
         for i, info in enumerate(self.char_info):
-            if info.width not in width_table:
+            # width_index == 0 indicates no characters, so do not use it
+            if info.width not in width_table[1:]:
                 width_index = len(width_table)
                 if width_index >= 256:
                     raise BadJFM("Too many distinct values for 'width'.")
                 width_table.append(info.width)
             else:
-                width_index = width_table.index(info.width)
+                width_index = width_table[1:].index(info.width) + 1
 
             if info.height not in height_table:
                 height_index = len(height_table)
