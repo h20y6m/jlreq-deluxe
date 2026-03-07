@@ -22,12 +22,18 @@ class Config:
 
 
 JLREQ_VARIANTS = ["", "b", "z", "bz"]
+JLREQ_FAMILIES = ["", "g"]
 OTF_VARIANTS = [("nml", ""), ("nml", "n"), ("exp", ""), ("exp", "n"), ("ruby", "")]
 OTF_FAMILIES = ["minl", "minr", "minb", "gothr", "gothb", "gotheb", "mgothr"]
 PXUFONT_VARIANTS = [("nml", ""), ("nml", "n"), ("ruby", "")]
 
 
 def generate_all(config: Config):
+    generate_deluxe(config)
+    generate_ufont(config)
+
+
+def generate_deluxe(config: Config):
     for jv in JLREQ_VARIANTS:
         for ov, on in OTF_VARIANTS:
             for of in OTF_FAMILIES:
@@ -51,6 +57,8 @@ def generate_all(config: Config):
                 d_name = f"{jv}jlreq--up{ov}{of}{on}-v"
                 generate(j_name, o_name, d_name, config)
 
+
+def generate_ufont(config: Config):
     for jv in JLREQ_VARIANTS:
         for ov, on in PXUFONT_VARIANTS:
             for of in OTF_FAMILIES:
@@ -73,6 +81,22 @@ def generate_all(config: Config):
                 o_name = f"zu-up{ov}{of}{on}-v"
                 d_name = f"zu-{jv}jlreq--up{ov}{of}{on}-v"
                 generate(j_name, o_name, d_name, config)
+
+    # generate_ufont_jlreq(config)
+
+
+def generate_ufont_jlreq(config: Config):
+    for jv in JLREQ_VARIANTS:
+        for jf in JLREQ_FAMILIES:
+            j_name = f"{jv}jlreq"
+            o_name = f"zu-jis{jf}"
+            d_name = f"zu-{jv}jlreq{jf}"
+            generate(j_name, o_name, d_name, config)
+
+            j_name = f"{jv}jlreq-v"
+            o_name = f"zu-jis{jf}-v"
+            d_name = f"zu-{jv}jlreq{jf}-v"
+            generate(j_name, o_name, d_name, config)
 
 
 def generate(j_name, o_name, d_name, config: Config):
@@ -165,6 +189,7 @@ def generate(j_name, o_name, d_name, config: Config):
     d_jfm_name = config.tfmdir / f"{d_name}.tfm"
     logger.info(f"Save {d_jfm_name}")
     d_jfm.save(d_jfm_name)
+    # JFM().load(d_jfm_name)
 
     d_vf_name = config.vfdir / f"{d_name}.vf"
     logger.info(f"Save {d_vf_name}")
