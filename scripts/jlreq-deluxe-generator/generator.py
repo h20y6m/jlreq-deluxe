@@ -5,7 +5,7 @@ from pathlib import Path
 
 from jfm import JFM
 from kpse import find_file
-from utils import to_fixed_str
+from utils import f12p20, to_fixed_str
 from virtual_font import CharacterPacket, FontDefinition, SimpleDvi, VF
 
 logger = logging.getLogger(__name__)
@@ -40,66 +40,62 @@ def generate_deluxe(config: Config):
                 j_name = f"{jv}jlreq"
                 o_name = f"{ov}{of}{on}-h"
                 d_name = f"{jv}jlreq--{ov}{of}{on}-h"
-                generate(j_name, o_name, d_name, config)
+                generate_one(j_name, o_name, d_name, config)
 
                 j_name = f"{jv}jlreq-v"
                 o_name = f"{ov}{of}{on}-v"
                 d_name = f"{jv}jlreq--{ov}{of}{on}-v"
-                generate(j_name, o_name, d_name, config)
+                generate_one(j_name, o_name, d_name, config)
 
                 j_name = f"u{jv}jlreq"
                 o_name = f"up{ov}{of}{on}-h"
                 d_name = f"{jv}jlreq--up{ov}{of}{on}-h"
-                generate(j_name, o_name, d_name, config)
+                generate_one(j_name, o_name, d_name, config)
 
                 j_name = f"u{jv}jlreq-v"
                 o_name = f"up{ov}{of}{on}-v"
                 d_name = f"{jv}jlreq--up{ov}{of}{on}-v"
-                generate(j_name, o_name, d_name, config)
+                generate_one(j_name, o_name, d_name, config)
 
 
 def generate_ufont(config: Config):
+    for jv in JLREQ_VARIANTS:
+        for jf in JLREQ_FAMILIES:
+            j_name = f"{jv}jlreq"
+            u_name = f"zu-jis{jf}"
+            d_name = f"zu-{jv}jlreq{jf}"
+            generate_one(j_name, u_name, d_name, config)
+
+            j_name = f"{jv}jlreq-v"
+            u_name = f"zu-jis{jf}-v"
+            d_name = f"zu-{jv}jlreq{jf}-v"
+            generate_one(j_name, u_name, d_name, config)
+
     for jv in JLREQ_VARIANTS:
         for ov, on in PXUFONT_VARIANTS:
             for of in OTF_FAMILIES:
                 j_name = f"{jv}jlreq"
                 o_name = f"zu-{ov}{of}{on}-h"
                 d_name = f"zu-{jv}jlreq--{ov}{of}{on}-h"
-                generate(j_name, o_name, d_name, config)
+                generate_one(j_name, o_name, d_name, config)
 
                 j_name = f"{jv}jlreq-v"
                 o_name = f"zu-{ov}{of}{on}-v"
                 d_name = f"zu-{jv}jlreq--{ov}{of}{on}-v"
-                generate(j_name, o_name, d_name, config)
+                generate_one(j_name, o_name, d_name, config)
 
                 j_name = f"u{jv}jlreq"
                 o_name = f"zu-up{ov}{of}{on}-h"
                 d_name = f"zu-{jv}jlreq--up{ov}{of}{on}-h"
-                generate(j_name, o_name, d_name, config)
+                generate_one(j_name, o_name, d_name, config)
 
                 j_name = f"u{jv}jlreq-v"
                 o_name = f"zu-up{ov}{of}{on}-v"
                 d_name = f"zu-{jv}jlreq--up{ov}{of}{on}-v"
-                generate(j_name, o_name, d_name, config)
-
-    # generate_ufont_jlreq(config)
+                generate_one(j_name, o_name, d_name, config)
 
 
-def generate_ufont_jlreq(config: Config):
-    for jv in JLREQ_VARIANTS:
-        for jf in JLREQ_FAMILIES:
-            j_name = f"{jv}jlreq"
-            o_name = f"zu-jis{jf}"
-            d_name = f"zu-{jv}jlreq{jf}"
-            generate(j_name, o_name, d_name, config)
-
-            j_name = f"{jv}jlreq-v"
-            o_name = f"zu-jis{jf}-v"
-            d_name = f"zu-{jv}jlreq{jf}-v"
-            generate(j_name, o_name, d_name, config)
-
-
-def generate(j_name, o_name, d_name, config: Config):
+def generate_one(j_name, o_name, d_name, config: Config):
     # jlreqのJFMを読み込み
     j_jfm_name = find_file(f"{j_name}.tfm")
     j_jfm = JFM()
@@ -112,10 +108,11 @@ def generate(j_name, o_name, d_name, config: Config):
     logger.info(f"Load {o_jfm_name}")
     o_jfm.load(o_jfm_name)
 
-    # 文字タイプ0の文字幅が異なっているときはエラー
+    # 文字タイプ0の文字幅が異なっている！
+    scale = 1.0
     if j_jfm.get_type_width(0) != o_jfm.get_type_width(0):
-        logger.error("TYPE 0 CHARWD missmatch!!")
-        return False
+        scale = j_jfm.get_type_width(0) / o_jfm.get_type_width(0)
+        logger.warning(f"TYPE 0 CHARWD missmatch!! scaled {scale}")
 
     # jlreqのVFを読み込み
     j_vf_name = find_file(f"{j_name}.vf")
@@ -141,7 +138,7 @@ def generate(j_name, o_name, d_name, config: Config):
     d_vf.design_size = j_jfm.design_size
     d_vf.font_definitions[0] = FontDefinition(
         o_jfm.check_sum,
-        o_jfm.design_size / j_jfm.design_size,
+        o_jfm.design_size / j_jfm.design_size * scale,
         o_jfm.design_size,
         f"{o_name}".encode("ascii"),
     )
@@ -153,7 +150,7 @@ def generate(j_name, o_name, d_name, config: Config):
     )
     for k in kanji_list:
         j_wd = j_jfm.get_char_width(k)
-        o_wd = o_jfm.get_char_width(k)
+        o_wd = f12p20(o_jfm.get_char_width(k) * scale)
         if j_wd != o_wd:
             logger.debug(
                 f"H {k:04X} CHARWD {to_fixed_str(j_wd)} <=> {to_fixed_str(o_wd)}"
@@ -170,7 +167,7 @@ def generate(j_name, o_name, d_name, config: Config):
             else:  # j_wd > o_wd:
                 dvi = o_vf.get_char_simple_dvi(k)
                 if dvi and dvi.move_right:
-                    move_right = dvi.move_right
+                    move_right = f12p20(move_right * scale)
                     logger.debug(f"   otf: MOVERIGHT R {to_fixed_str(move_right)})")
 
                     move_right = (j_wd - o_wd) * move_right / (o_wd - o_jfm.zw)
