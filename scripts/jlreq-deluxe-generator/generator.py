@@ -5,7 +5,7 @@ from pathlib import Path
 
 from jfm import JFM
 from kpse import find_file
-from utils import f12p20, to_fixed_str
+from utils import f_near, to_fixed_str
 from virtual_font import CharacterPacket, FontDefinition, SimpleDvi, VF
 
 logger = logging.getLogger(__name__)
@@ -108,11 +108,19 @@ def generate_one(j_name, o_name, d_name, config: Config):
     logger.info(f"Load {o_jfm_name}")
     o_jfm.load(o_jfm_name)
 
-    # 文字タイプ0の文字幅が異なっている！
+    # 文字タイプ0の文字幅が全角じゃない！
+    if j_jfm.get_type_width(0) != j_jfm.zw:
+        logger.error(f"TYPE 0 CHARWD not 1zw!! ({j_name})")
+        return
+    if o_jfm.get_type_width(0) != o_jfm.zw:
+        logger.error(f"TYPE 0 CHARWD not 1zw!! ({o_name})")
+        return
+
+    # 全角幅が異なっている！
     scale = 1.0
-    if j_jfm.get_type_width(0) != o_jfm.get_type_width(0):
-        scale = j_jfm.get_type_width(0) / o_jfm.get_type_width(0)
-        logger.warning(f"TYPE 0 CHARWD missmatch!! scaled {scale}")
+    if j_jfm.zw != o_jfm.zw:
+        scale = j_jfm.zw / o_jfm.zw
+        logger.warning(f"1zw missmatch!! scale to {j_jfm.zw} / {o_jfm.zw} = {scale}")
 
     # jlreqのVFを読み込み
     j_vf_name = find_file(f"{j_name}.vf")
@@ -150,28 +158,36 @@ def generate_one(j_name, o_name, d_name, config: Config):
     )
     for k in kanji_list:
         j_wd = j_jfm.get_char_width(k)
-        o_wd = f12p20(o_jfm.get_char_width(k) * scale)
-        if j_wd != o_wd:
+        o_wd = o_jfm.get_char_width(k)
+        j_wd_zw = j_wd / j_jfm.zw
+        o_wd_zw = o_wd / o_jfm.zw
+        if not f_near(j_wd_zw, o_wd_zw):
             logger.debug(
-                f"H {k:04X} CHARWD {to_fixed_str(j_wd)} <=> {to_fixed_str(o_wd)}"
+                f"diff: {k:04X}: {to_fixed_str(j_wd_zw)}zw vs {to_fixed_str(o_wd_zw)}zw"
             )
             move_right = 0.0
-            if j_wd < o_wd:
+            if not f_near(j_wd_zw, 1.0):
                 dvi = j_vf.get_char_simple_dvi(k)
                 if dvi and dvi.move_right:
-                    move_right = dvi.move_right
-                    logger.debug(f" jlreq: MOVERIGHT R {to_fixed_str(move_right)}")
-
-                    move_right = (j_wd - o_wd) * move_right / (j_wd - j_jfm.zw)
-                    logger.debug(f"     => MOVERIGHT R {to_fixed_str(move_right)}")
-            else:  # j_wd > o_wd:
+                    move_right = dvi.move_right / j_jfm.zw
+                    logger.debug(f"   j: {to_fixed_str(move_right)}zw")
+                    move_right = (
+                        move_right * j_jfm.zw * (o_wd_zw - j_wd_zw) / (1.0 - j_wd_zw)
+                    )
+                    logger.debug(f"   => {to_fixed_str(move_right)}")
+            elif not f_near(o_wd, 1.0):
                 dvi = o_vf.get_char_simple_dvi(k)
                 if dvi and dvi.move_right:
-                    move_right = f12p20(move_right * scale)
-                    logger.debug(f"   otf: MOVERIGHT R {to_fixed_str(move_right)})")
-
-                    move_right = (j_wd - o_wd) * move_right / (o_wd - o_jfm.zw)
-                    logger.debug(f"     => MOVERIGHT R {to_fixed_str(move_right)}")
+                    move_right = dvi.move_right / o_jfm.zw
+                    logger.debug(f"   o: {to_fixed_str(move_right)}zw")
+                    move_right = (
+                        -move_right * j_jfm.zw * (j_wd_zw - o_wd_zw) / (1.0 - o_wd_zw)
+                    )
+                    logger.debug(f"   => {to_fixed_str(move_right)}")
+            else:
+                logger.warning(
+                    f"diff: {k:04X}: {to_fixed_str(j_wd_zw)}zw vs {to_fixed_str(o_wd_zw)}zw"
+                )
 
             d_vf.char_packets[k] = CharacterPacket(j_wd, SimpleDvi(None, move_right, k))
 

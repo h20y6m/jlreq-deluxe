@@ -19,11 +19,16 @@ def to_fixed(x: float) -> int:
     return int(round(x * FIXED_SCALE))
 
 
-def f12p20(v: float) -> float:
-    return round(v * FIXED_SCALE) * FIXED_UNIT
+def f_round(v: float) -> float:
+    return from_fixed(to_fixed(v))
+
+
+def f_near(x: float, y: float) -> bool:
+    return abs(x - y) <= 2.0 * FIXED_UNIT
 
 
 def to_fixed_str(v: float) -> str:
+    v = f_round(v)
     us = str(v + FIXED_HALF)
     ls = str(v - FIXED_HALF)
     up = us.find(".")
