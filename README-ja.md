@@ -71,6 +71,9 @@ jlreq クラスでは [JLReq](https://www.w3.org/TR/jlreq/?lang=ja) に従った
 更新履歴
 -------
 
+* Version 0.6.0 <2026/03/14>
+  - JFM/VF 生成を刷新
+  - jlreq 2025-03-16 および japanese-otf 2026-03-09 に基づいた JFM/VF を生成
 * Version 0.5.0 <2024/02/18>
   - jlreq 20240213 用に JFM/VF を調整
 * Version 0.4.1 <2023/02/23>

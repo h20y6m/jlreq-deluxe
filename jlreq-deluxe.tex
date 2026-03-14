@@ -7,7 +7,7 @@
 \usepackage{pxjahyper}
 \usepackage{bxghost}
 \usepackage{bxtexlogo}
-\bxtexlogoimport{*}
+\bxtexlogoimport{*,**}
 \usepackage{shortvrb}
 \MakeShortVerb{\|}
 \newcommand{\pkg}[1]{\textsf{#1}}
@@ -18,7 +18,7 @@
 
 \title{\pkg{jlreq-deluxe}パッケージ}
 \author{Yukimasa Morimi (h20y6m)\thanks{\url{https://github.com/h20y6m}}}
-\date{2024-02-18}
+\date{2026-03-14}
 
 \begin{document}
 
@@ -87,8 +87,8 @@
   ぶら下げ組みを行いたい場合は|hanging_punctuation|オプションを使用する。
 \item |jis2004|\\
   既定で有効になる。
-  無効にしたい場合は|jis2004=false|を指定する。
-\item |uplatex|\\
+  無効にしたい場合は|jis2004=false|/|nojis2004|を指定する。
+\item |platex|/|uplatex|\\
   \cls{jlreq}クラスを使用している場合は自動的に設定される。
 \item |scale|\\
   \cls{jlreq}クラスを使用している場合は自動的に設定され指定は無視される。
@@ -97,6 +97,8 @@
 また以下のオプションが使用できる。
 
 \begin{itemize}
+\item |nojis2004|\\
+  |jis2004|オプションの否定、|jis2004=false|と等価。
 \item |hanging_punctuation|\\
   \cls{jlreq}クラスの|hanging_punctuation|オプションに対応するVFを使用する。
   \cls{jlreq}クラスを使用している場合は自動的に設定され指定は無視される。
@@ -105,5 +107,31 @@
   \cls{jlreq}クラスを使用している場合は自動的に設定され指定は無視される。
 \end{itemize}
 
+
+\section{\pkg{pxchfon}パッケージとの併用}
+
+\pkg{pxchfon}パッケージを用いることで、(u)\pLaTeX{}+\DVIPDFMx{}環境において標準の和文フォントを指定できる。
+本パッケージを使用している場合でも、基本的には\pkg{pxchfon}パッケージによる和文フォント指定機能は利用できる。
+
+ただし、\pkg{pxchfon}パッケージの|unicode|オプション（あるいはそれが有効になるプリセットオプション）を使用した場合には、
+本パッケージでは提供していない追加の和文VFが必要になるため、そのままでは使用できない。
+
+\pkg{pxchfon}パッケージの|unicode|オプションと併用する方法については、
+以下のTeX Forumのディスカッション、および「某ZR氏」による解説記事が参考になる。
+\begin{itemize}
+\item \href{https://okumuralab.org/tex/mod/forum/discuss.php?d=3993}%
+        {QA: upLaTeX下のjlreq-deluxeで多書体化するとpxchfonでフォント変更ができない \string| TeX}%
+\item \href{https://zrbabbler.hatenablog.com/entry/2025/09/07/175419}%
+        {jlreqしてjlreq-deluxeしてpxchfonしてunicodeする方法 - マクロツイーター}%
+\end{itemize}
+
+また、本パッケージの開発リポジトリにある和文VF生成スクリプトには、
+これらの追加の和文VFを実験的に生成する機能が実装されている。
+以下のコマンドにより、必要な追加のフォントを生成できる。
+\begin{quote}
+\begin{verbatim}
+$ python3 scripts/jlreq-deluxe-generator --ufont
+\end{verbatim}
+\end{quote}
 
 \end{document}

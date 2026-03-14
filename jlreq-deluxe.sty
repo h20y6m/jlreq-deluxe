@@ -1,7 +1,7 @@
 %%
 %% jlreq-deluxe.sty
 %%
-%% Copyright (c) 2019-2024 Yukimasa Morimi (h20y6m)
+%% Copyright (c) 2019-2026 Yukimasa Morimi (h20y6m)
 %%   GitHub:   https://github.com/h20y6m
 %%
 %% This package is distributed under the MIT License.
@@ -11,7 +11,7 @@
 
 \NeedsTeXFormat{pLaTeX2e}
 \RequirePackage{expl3}[2019-05-03]
-\ProvidesExplPackage {jlreq-deluxe} {2024-02-18} {0.5.0}
+\ProvidesExplPackage {jlreq-deluxe} {2026-03-14} {0.6.0}
   {Multi-weight Japanese font for jlreq class}
 
 % --------------------------------------------------
@@ -26,6 +26,7 @@
 \tl_new:N \l__jldx_scale_tl
 \bool_new:N \l__jldx_deluxe_bool
 \bool_new:N \l__jldx_jismmiv_bool
+\bool_new:N \l__jldx_platex_bool
 \bool_new:N \l__jldx_uplatex_bool
 \bool_new:N \l__jldx_hanging_punctuation_bool
 \bool_new:N \l__jldx_zenkakunibu_nibu_bool
@@ -35,6 +36,9 @@
 
 \msg_new:nnn { jlreq-deluxe } { option-not-available }
   { The~`#1'~option~is~not~available. }
+
+\msg_new:nnn { jlreq-deluxe } { multi-engine-options }
+  { Multiple~engine~options~were~specified. }
 
 % --------------------------------------------------
 % Helpers
@@ -52,22 +56,29 @@
 % options for japanese-otf package
 \keys_define:nn { jlreq-deluxe }
   {
-    deluxe .bool_set:N = \l__jldx_deluxe_bool,
-    burasage .code:n =
+    deluxe    .bool_set:N         = \l__jldx_deluxe_bool,
+    jis2004   .bool_set:N         = \l__jldx_jismmiv_bool,
+    nojis2004 .bool_set_inverse:N = \l__jldx_jismmiv_bool,
+    platex    .bool_set:N         = \l__jldx_platex_bool,
+    uplatex   .bool_set:N         = \l__jldx_uplatex_bool,
+    scale     .tl_set:N           = \l__jldx_scale_tl,
+    scale     .value_required:n   = true,
+  }
+% forbidden options for japanese-otf package
+\keys_define:nn { jlreq-deluxe }
+  {
+    burasage  .code:n =
       {
         \msg_error:nnn { jlreq-deluxe } { option-not-available }
           { burasage }
       },
-    jis2004 .bool_set:N = \l__jldx_jismmiv_bool,
-    uplatex .bool_set:N = \l__jldx_uplatex_bool,
-    scale .tl_set:N = \l__jldx_scale_tl,
   }
 
 % options for this package
 \keys_define:nn { jlreq-deluxe }
   {
     hanging_punctuation .bool_set:N = \l__jldx_hanging_punctuation_bool,
-    zenkakunibu_nibu .bool_set:N = \l__jldx_zenkakunibu_nibu_bool,
+    zenkakunibu_nibu    .bool_set:N = \l__jldx_zenkakunibu_nibu_bool,
   }
 
 % unknown option
@@ -82,12 +93,18 @@
 % set default options
 \keys_set:nn { jlreq-deluxe }
   {
-    deluxe = true,
+    deluxe  = true,
     jis2004 = true,
   }
 
 % process options
 \ProcessKeysOptions { jlreq-deluxe }
+
+% both platex and uplatex
+\bool_lazy_and:nnT { \l__jldx_platex_bool } { \l__jldx_uplatex_bool }
+  {
+    \msg_error:nn { jlreq-deluxe } { multi-engine-options }
+  }
 
 % --------------------------------------------------
 %% jlreq parameters
@@ -95,11 +112,16 @@
 \__jldx_if_class_loaded:nT { jlreq }
   {
     % uplatex
-    \bool_lazy_and:nnT
+    \bool_lazy_and:nnTF
       { \token_if_primitive_p:N \ucs }
       { \int_compare_p:n { \ucs"FA4A = "FA4A } }
       {
-        \bool_set_true:N \l__jldx_uplatex_bool
+        \bool_set_false:N \l__jldx_platex_bool
+        \bool_set_true:N  \l__jldx_uplatex_bool
+      }
+      {
+        \bool_set_true:N  \l__jldx_platex_bool
+        \bool_set_false:N \l__jldx_uplatex_bool
       }
     % scale
     \jlreq@divide { \jlreq@jafontsize } { \jlreq@fontsize }
@@ -148,11 +170,20 @@
   }
 
 % jis2004
-\bool_if:NT \l__jldx_jismmiv_bool
+\bool_if:NTF \l__jldx_jismmiv_bool
   {
     \PassOptionsToPackage { jis2004 } { pxjodel }
+    \PassOptionsToPackage { jis2004 } { pxchfon }
+  }
+  {
+    \PassOptionsToPackage { nojis2004 } { pxchfon }
   }
 
+% platex
+\bool_if:NT \l__jldx_platex_bool
+  {
+    \PassOptionsToPackage { platex } { pxjodel }
+  }
 % uplatex
 \bool_if:NT \l__jldx_uplatex_bool
   {

@@ -32,6 +32,9 @@ This package is distributed under [the MIT License](LICENSE).
 History
 -------
 
+* Version 0.6.0 <2026/03/14>
+  - Revamped JFM/VF generation
+  - Generated JFM/VF based on jlreq 2025-03-16 and japanese-otf 2026-03-09
 * Version 0.5.0 <2024/02/18>
   - Adjust JFM/VF for jlreq 20240213.
 * Version 0.4.1 <2023/02/23>
